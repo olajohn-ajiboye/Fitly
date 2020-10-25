@@ -1,15 +1,18 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
-import { login, logOut } from "../features/auth";
+import { loginAsync, logOutAsync } from "../features/auth";
+import { RootState } from "../app/rootReducer";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.isAuth);
+  console.log(user);
 
   return (
     <div>
-      <Button onClick={() => dispatch(login())}> Login</Button>
-      <Button onClick={() => dispatch(logOut())}> Out</Button>
+      <Button onClick={() => dispatch(loginAsync())}> Login</Button>
+      <Button onClick={() => dispatch(logOutAsync())}> Out</Button>
     </div>
   );
 }

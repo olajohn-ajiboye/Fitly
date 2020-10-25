@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles, styled } from "@material-ui/core/styles";
-import { Link, Slide, Paper, Typography } from "@material-ui/core";
+import { Link, Slide, Paper } from "@material-ui/core";
 
-import { currentUser, isAuth, login, logOut } from "../features/auth";
+import { RootState } from "../app/rootReducer";
 
 import bench from "./../assets/bench.svg";
 import scale from "./../assets/scale.svg";
@@ -41,26 +41,14 @@ interface AppBarProps {
 }
 const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
   const { root } = useStyles();
-  const auth = useSelector(isAuth);
-  const user = useSelector(currentUser)!;
-  console.log(auth);
-
-  const userProfile = () => {
-    console.log("user", user);
-    return auth && user ? user : null;
-  };
+  const user = useSelector((state: RootState) => state.auth.currentUser);
+  console.log(user);
 
   return (
     <Slide direction="down" in={true} mountOnEnter unmountOnExit>
       <Paper onClick={onMobileMenuClick}>
         <nav className={root}>
-          <Typography variant="h6">
-            {userProfile()?.displayName}
-            <Icon src={height} alt="body" />
-          </Typography>
-          <StyledLink href="#" variant="body2">
-            <Icon src={userProfile()?.photoURL ?? ""} alt="bench" /> Workout
-          </StyledLink>
+          <h1>{user?.displayName}</h1>
           <StyledLink href="#" variant="body2">
             <Icon src={scale} alt="scale" /> Weight
           </StyledLink>
