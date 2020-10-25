@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid, Hidden } from "@material-ui/core";
 
-import { Chart, Motivation, SideBar, SummaryNav, AppBar } from "../components";
+import { Chart } from "../features/chart";
+import { SummaryNav } from "../features/currentDay";
+import { SideBar } from "../components";
+import { Motivation } from "../features/motivation";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,17 +22,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Layout() {
+interface LayoutProps {
+  onMobileMenuClick: () => void;
+  active: boolean;
+}
+export default function Layout({ onMobileMenuClick, active }: LayoutProps) {
   const { container, root } = useStyles();
-  const [active, setActive] = useState<boolean>(false);
-
-  const onMobileMenuClick = () => {
-    setActive(!active);
-  };
 
   return (
     <div className={root}>
-      <AppBar onMobileMenuClick={onMobileMenuClick} />
       <Grid container className={container} spacing={2}>
         <Grid item xs lg={3}>
           <Hidden xsDown={!active}>
