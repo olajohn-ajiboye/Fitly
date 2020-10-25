@@ -1,8 +1,9 @@
 import React from "react";
-import { makeStyles,styled } from "@material-ui/core/styles";
+import { makeStyles, styled } from "@material-ui/core/styles";
 import {
   AppBar,
   Button,
+  Hidden,
   IconButton,
   Typography,
   Toolbar,
@@ -17,15 +18,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     backgroundColor: "#DADAE0",
-    color: '#2A338F',
+    color: "#2A338F",
     height: 50,
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color: '#2A338F',
-    '&:hover':{
-        backgroundColor: '#EF5FA2'
-    }
+    color: "#2A338F",
+    "&:hover": {
+      backgroundColor: "#EF5FA2",
+    },
   },
   title: {
     flexGrow: 1,
@@ -33,10 +34,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const StyledButton = styled(Button)({
-    backgroundColor: '#EF5FA2',
-})
+  backgroundColor: "#EF5FA2",
+});
 
-const Appbar = () => {
+interface AppBarProps {
+  onMobileMenuClick: () => void;
+}
+const Appbar = ({ onMobileMenuClick }: AppBarProps) => {
   const { root, appBar, menuButton, title } = useStyles();
 
   return (
@@ -44,7 +48,10 @@ const Appbar = () => {
       <AppBar position="fixed" className={appBar}>
         <Toolbar>
           <IconButton edge="start" className={menuButton} aria-label="menu">
-            <MenuIcon />
+            <Hidden>
+              {" "}
+              <MenuIcon onClick={onMobileMenuClick} />
+            </Hidden>
           </IconButton>
           <Typography variant="h6" className={title}>
             News
@@ -52,7 +59,7 @@ const Appbar = () => {
           <StyledButton color="inherit">Login</StyledButton>
         </Toolbar>
       </AppBar>
-      <Toolbar/>
+      <Toolbar />
     </div>
   );
 };

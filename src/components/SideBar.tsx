@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, styled } from "@material-ui/core/styles";
-import { Link } from "@material-ui/core";
+import { Link, Slide } from "@material-ui/core";
 
 import bench from "./../assets/bench.svg";
 import scale from "./../assets/scale.svg";
@@ -34,35 +34,40 @@ const StyledLink = styled(Link)({
   width: "calc(100% + 10px)",
 });
 
-const SideBar = () => {
+interface AppBarProps {
+  onMobileMenuClick: () => void;
+}
+const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
   const { root } = useStyles();
   return (
-    <Paper>
-      <nav className={root}>
-        <StyledLink href="#" variant="body2">
-          <Icon src={bench} alt="bench" /> Workout
-        </StyledLink>
-        <StyledLink href="#" variant="body2">
-          <Icon src={scale} alt="scale" /> Weight
-        </StyledLink>
-        <StyledLink href="#" variant="body2">
-          <Icon src={height} alt="body" /> Body
-        </StyledLink>
-        <StyledLink href="#" variant="body2">
-          <Icon src={healthy} alt="healthy" />
-          Body <Icon src={diet} alt="diet" />
-        </StyledLink>
-        <StyledLink href="#" variant="body2">
-          <Icon src={scale} alt="scale" /> Weight
-        </StyledLink>
-        <StyledLink href="#" variant="body2">
-          <Icon src={height} alt="body" /> Body
-        </StyledLink>
-        <StyledLink href="#" variant="body2">
-          <Icon src={diet} alt="diet" /> Weight
-        </StyledLink>
-      </nav>
-    </Paper>
+    <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+      <Paper onClick={onMobileMenuClick}>
+        <nav className={root}>
+          <StyledLink href="#" variant="body2">
+            <Icon src={bench} alt="bench" /> Workout
+          </StyledLink>
+          <StyledLink href="#" variant="body2">
+            <Icon src={scale} alt="scale" /> Weight
+          </StyledLink>
+          <StyledLink href="#" variant="body2">
+            <Icon src={height} alt="body" /> Body
+          </StyledLink>
+          <StyledLink href="#" variant="body2">
+            <Icon src={healthy} alt="healthy" />
+            Body <Icon src={diet} alt="diet" />
+          </StyledLink>
+          <StyledLink href="#" variant="body2">
+            <Icon src={scale} alt="scale" /> Weight
+          </StyledLink>
+          <StyledLink href="#" variant="body2">
+            <Icon src={height} alt="body" /> Body
+          </StyledLink>
+          <StyledLink href="#" variant="body2">
+            <Icon src={diet} alt="diet" /> Weight
+          </StyledLink>
+        </nav>
+      </Paper>
+    </Slide>
   );
 };
 

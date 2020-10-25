@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
-import Hidden from "@material-ui/core/Hidden";
+import { Grid, Hidden } from "@material-ui/core";
 
 import { Chart, Motivation, SideBar, SummaryNav, AppBar } from "../components";
 
@@ -22,14 +21,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Layout() {
   const { container, root } = useStyles();
+  const [active, setActive] = useState<boolean>(false);
+
+  const onMobileMenuClick = () => {
+    setActive(!active);
+  };
 
   return (
     <div className={root}>
-      <AppBar />
+      <AppBar onMobileMenuClick={onMobileMenuClick} />
       <Grid container className={container} spacing={2}>
         <Grid item xs lg={3}>
-          <Hidden xsDown={true}>
-            <SideBar />
+          <Hidden xsDown={!active}>
+            <SideBar onMobileMenuClick={onMobileMenuClick} />
           </Hidden>
         </Grid>
         {/* Main */}
