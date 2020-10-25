@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://eslamelshereef.com/instadiet.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eslam El-Shereef Portfolio | Instadiet</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./Eslam El-Shereef Portfolio _ Instadiet_files/bootstrap.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="./Eslam El-Shereef Portfolio _ Instadiet_files/animate.css">
+    <!-- Favicon -->
+    <link rel="icon" href="http://eslamelshereef.com/imgs/favicon.ico" type="image/png">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="./Eslam El-Shereef Portfolio _ Instadiet_files/owl.carousel.min.css">
+    <link rel="stylesheet" href="./Eslam El-Shereef Portfolio _ Instadiet_files/owl.theme.default.min.css">
+    <!-- Css -->
+    <link rel="stylesheet" href="./Eslam El-Shereef Portfolio _ Instadiet_files/style.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript" async="" src="./Eslam El-Shereef Portfolio _ Instadiet_files/analytics.js"></script><script async="" src="./Eslam El-Shereef Portfolio _ Instadiet_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88171112-3');
+</script>
+
+  <script type="text/javascript">// Promises 
+var _eid_promises = {}; 
+// Turn the incoming message from extension 
+// into pending Promise resolving 
+window.addEventListener("message", function(event) { 
+    if(event.source !== window) return; 
+    if(event.data.src && (event.data.src === "background.js")) { 
+        console.log("Page received: "); 
+        console.log(event.data); 
+        // Get the promise 
+        if(event.data.nonce) { 
+            var p = _eid_promises[event.data.nonce]; 
+            // resolve 
+            if(event.data.result === "ok") { 
+                if(event.data.signature !== undefined) { 
+                    p.resolve({hex: event.data.signature}); 
+                } else if(event.data.version !== undefined) { 
+                    p.resolve(event.data.extension + "/" + event.data.version); 
+                } else if(event.data.cert !== undefined) { 
+                    p.resolve({hex: event.data.cert}); 
+                } else { 
+                    console.log("No idea how to handle message"); 
+                    console.log(event.data); 
+                } 
+            } else { 
+                // reject 
+                p.reject(new Error(event.data.result)); 
+            } 
+            delete _eid_promises[event.data.nonce]; 
+        } else { 
+            console.log("No nonce in event msg"); 
+        } 
+    } 
+}, false); 
+ 
+ 
+function TokenSigning() { 
+    function nonce() { 
+        var val = ""; 
+        var hex = "abcdefghijklmnopqrstuvwxyz0123456789"; 
+        for(var i = 0; i < 16; i++) val += hex.charAt(Math.floor(Math.random() * hex.length)); 
+        return val; 
+    } 
+ 
+    function messagePromise(msg) { 
+        return new Promise(function(resolve, reject) { 
+            // amend with necessary metadata 
+            msg["nonce"] = nonce(); 
+            msg["src"] = "page.js"; 
+            // send message 
+            window.postMessage(msg, "*"); 
+            // and store promise callbacks 
+            _eid_promises[msg.nonce] = { 
+                resolve: resolve, 
+                reject: reject 
+            }; 
+        }); 
+    } 
+    this.getCertificate = function(options) { 
+        var msg = {type: "CERT", lang: options.lang, filter: options.filter}; 
+        console.log("getCertificate()"); 
+        return messagePromise(msg); 
+    }; 
+    this.sign = function(cert, hash, options) { 
+        var msg = {type: "SIGN", cert: cert.hex, hash: hash.hex, hashtype: hash.type, lang: options.lang, info: options.info}; 
+        console.log("sign()"); 
+        return messagePromise(msg); 
+    }; 
+    this.getVersion = function() { 
+        console.log("getVersion()"); 
+        return messagePromise({ 
+            type: "VERSION" 
+        }); 
+    }; 
+}</script></head>
+  <body>
+    <!-- Star Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-about">
+      <div class="container">
+        <a class="navbar-brand go-back" href="http://eslamelshereef.com/index.html">
+          <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/left-arrow.svg" alt="left-arrow">
+          Go Back
+        </a>
+        <button class="the-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="the-line"></span>
+          <span class="the-line"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="http://eslamelshereef.com/about.html">About/Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link talk" href="mailto:biz@eslamelshereef.com?subject=Business%20Inquiry">Let's Talk!</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Start case -->
+    <section class="case wow fadeInUp" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+      <div class="container">
+        <h3>C.A.S.E</h3>
+        <h1><span>Crafting</span> your ideal body</h1>
+      </div>
+    </section>
+    <!-- End case -->
+
+    <!-- Start Story -->
+    <section class="story wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.5s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeInUp;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <h3>Story:</h3>
+            <p class="story-text">
+              Instadiet is a platform that works on connecting people who need to lose weight with top notch dietitians helping them achieve the ideal body weight via tailored meal plans. instadiet harness the power of technology to be always a step head from the competition
+            </p>
+          </div>
+          <div class="col-lg-3 col-md-4">
+            <h3>Client:</h3>
+            <p>Instadiet</p>
+          </div>
+          <div class="col-lg-3 col-md-4  mr-md-auto">
+            <h3>Deliverables:</h3>
+            <p>Wireframing, Protoyping, Content Generation, UX, UI</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Story -->
+
+    <!-- Start Color Schema -->
+    <section class="color-schema instadiet wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.7s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.7s; animation-name: fadeInUp;">
+      <div class="container">
+        <div class="number">
+          <h2 class="number-title">01</h2>
+          <p class="number-text">Color Schema</p>
+        </div>
+        <div class="color">
+          <div class="d-flex">
+            <div style="background-color: #2A338F" class="flex-md-fill text-center">
+              <p>#2A3<span class="d-inline-block">38F</span></p>
+            </div>
+            <div style="background-color: #EF5FA2" class="flex-md-fill text-center">
+              <p>#EF5<span class="d-inline-block">FA2</span></p>
+            </div>
+            <div style="background-color: #DADAE0; color: #595A6E" class="flex-md-fill text-center">
+              <p>#DAD<span class="d-inline-block">AE0</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Color Schema -->
+
+    <!-- Start Typography -->
+    <section class="typography instadiet wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.7s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.7s; animation-name: fadeInUp;">
+      <div class="container">
+        <div class="number">
+          <h2 class="number-title">02</h2>
+          <p class="number-text">Typography</p>
+        </div>
+        <div class="fonts">
+          <div class="font mx-auto">
+            <div class="upper-f">
+              <div class="font-type">
+                <p>Poppins</p>
+                <span>. Regular</span>
+              </div>
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/poppins.svg" alt="poppins">
+            </div>
+            <div class="lower-f"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Typography -->
+
+    <!-- Start Grid System -->
+    <section class="grid-system instadiet wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.7s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.7s; animation-name: fadeInUp;">
+      <div class="container">
+        <div class="grid-system-content">
+          <div class="number">
+            <h2 class="number-title">03</h2>
+            <p class="number-text">Grid System</p>
+          </div>
+          <div class="grid">
+            <div class="column">
+              <p>70px</p>
+            </div>
+            <p class="grid-text">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column d-none d-lg-block">
+              <p>70px</p>
+            </div>
+            <p class="grid-text d-none d-lg-block">
+              30px
+            </p>
+            <div class="column">
+              <p>70px</p>
+            </div>
+          </div>
+          <div class="column-info">
+            <p>12 Cols</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Grid System -->
+
+    <!-- Start Iconography -->
+    <section class="iconography instadiet wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.7s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.7s; animation-name: fadeInUp;">
+      <div class="container">
+        <div class="number">
+          <h2 class="number-title">04</h2>
+          <p class="number-text">Iconography</p>
+        </div>
+        <div class="icons">
+          <table>
+            <tbody><tr>
+              <!-- tablet -->
+              <td><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/scale.svg" alt="scale"></td>
+              <td><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/bench.svg" alt="bench"></td>
+              <td class="d-none d-md-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/stethoscope.svg" alt="stethoscope"></td>
+              <td class="d-none d-md-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/healthy.svg" alt="healthy"></td>
+              <!-- tablet -->
+              <td class="d-none d-lg-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Lauging-apple.svg" alt="Lauging-apple"></td>
+              <td class="d-none d-lg-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/bowl-with-vegetables.svg" alt="bowl-with-vegetables"></td>
+            </tr>
+            <tr>
+              <!-- tablet -->
+              <td class="d-lg-none d-table-cell d-sm-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Lauging-apple.svg" alt="Lauging-apple"></td>
+              <td class="d-lg-none d-table-cell d-sm-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/bowl-with-vegetables.svg" alt="bowl-with-vegetables"></td>
+              <!-- tablet -->
+              <td class="d-none d-md-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/carrot.svg" alt="carrot"></td>
+              <td class="d-none d-md-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/roast-turkey.svg" alt="roast-turkey"></td>
+              <td class="d-none d-lg-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/restaurant.svg" alt="restaurant"></td>
+              <td class="d-none d-lg-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/gluten.svg" alt="gluten"></td>
+              <td class="d-none d-lg-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/balance.svg" alt="balance"></td>
+              <td class="d-none d-lg-table-cell"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/height.svg" alt="height"></td>
+              <!-- Mobile -->
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/stethoscope.svg" alt="stethoscope"></td>
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/healthy.svg" alt="healthy"></td>
+              <!-- Mobile -->
+            </tr>
+            <tr>
+              <!-- tablet -->
+              <td class="d-lg-none d-table-cell d-sm-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/restaurant.svg" alt="restaurant"></td>
+              <td class="d-lg-none d-table-cell d-sm-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/gluten.svg" alt="gluten"></td>
+              <td class="d-lg-none d-table-cell d-sm-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/balance.svg" alt="balance"></td>
+              <td class="d-lg-none d-table-cell d-sm-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/height.svg" alt="height"></td>
+              <!-- tablet -->
+              <!-- Mobile -->
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Lauging-apple.svg" alt="Lauging-apple"></td>
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/bowl-with-vegetables.svg" alt="bowl-with-vegetables"></td>
+              <!-- Mobile -->
+            </tr>
+            <tr>
+              <!-- Mobile -->
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/carrot.svg" alt="carrot"></td>
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/roast-turkey.svg" alt="roast-turkey"></td>
+              <!-- Mobile -->
+            </tr>
+            <tr>
+              <!-- Mobile -->
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/restaurant.svg" alt="restaurant"></td>
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/gluten.svg" alt="gluten"></td>
+              <!-- Mobile -->
+            </tr>
+            <tr>
+              <!-- Mobile -->
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/balance.svg" alt="balance"></td>
+              <td class="d-sm-table-cell d-md-none"><img src="./Eslam El-Shereef Portfolio _ Instadiet_files/healthy.svg" alt="healthy"></td>
+              <!-- Mobile -->
+            </tr>
+          </tbody></table>
+        </div>
+      </div>
+    </section>
+    <!-- End Iconography -->
+
+    <!-- Start Desktop Design -->
+    <section class="desktop-design wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.7s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.7s; animation-name: fadeInUp;">
+      <div class="container">
+        <div class="number">
+          <h2 class="number-title">05</h2>
+          <p class="number-text">Desktop Designs</p>
+        </div>
+        <div class="browsers">
+          <div class="browser">
+            <div class="browser-head">
+              Homepage
+              <div class="browser-icons">
+                <span style="background-color: #FF6565"></span>
+                <span style="background-color: #FBA643"></span>
+                <span style="background-color: #76E388"></span>
+              </div>
+            </div>
+            <div class="browser-body">
+              <div class="home-1 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/instadiethome1.png" alt="">
+              </div>
+              <div class="home-2 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/instadiethome2.png" alt="">
+              </div>
+              <div class="home-3 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/instadiethome3.png" alt="">
+              </div>
+              <div class="home-4 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/instadiethome4.png" alt="">
+              </div>
+              <div class="home-5 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/instadiethome5.png" alt="">
+              </div>
+              <div class="home-6 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/instadiethome6.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="browser">
+            <div class="browser-head">
+             Doctor Profile Page
+              <div class="browser-icons">
+                <span style="background-color: #FF6565"></span>
+                <span style="background-color: #FBA643"></span>
+                <span style="background-color: #76E388"></span>
+              </div>
+            </div>
+            <div class="browser-body">
+              <div class="home-1 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/DoctorProfile1.png" alt="">
+              </div>
+              <div class="home-2 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/DoctorProfile2.png" alt="">
+              </div>
+              <div class="home-3 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/DoctorProfile3.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="browser">
+            <div class="browser-head">
+              Diet Type Page
+              <div class="browser-icons">
+                <span style="background-color: #FF6565"></span>
+                <span style="background-color: #FBA643"></span>
+                <span style="background-color: #76E388"></span>
+              </div>
+            </div>
+            <div class="browser-body">
+              <div class="home-1 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/DietType1.png" alt="">
+              </div>
+              <div class="home-2 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/DietType2.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="browser">
+            <div class="browser-head">
+              Group Page
+              <div class="browser-icons">
+                <span style="background-color: #FF6565"></span>
+                <span style="background-color: #FBA643"></span>
+                <span style="background-color: #76E388"></span>
+              </div>
+            </div>
+            <div class="browser-body">
+              <div class="home-1 text-center">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/GroupPage.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="goals">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/goals.png" class="img-fluid" alt="">
+          </div>
+          <div class="body-values">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/body-values.png" class="img-fluid" alt="">
+          </div>
+          <div class="nutrition">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/nutrition.png" class="img-fluid" alt="">
+          </div>
+          <div class="account">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/account.png" class="img-fluid" alt="">
+          </div>
+          <div class="packages1">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/packages1.png" class="img-fluid" alt="">
+          </div>
+          <div class="packages2">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/packages2.png" class="img-fluid" alt="">
+          </div>
+          <div class="packages3">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/packages3.png" class="img-fluid" alt="">
+          </div>
+          <div class="thank-you">
+            <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Thank-you-page.png" class="img-fluid" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Desktop Design -->
+
+    <!-- Start Mobile Design -->
+    <section class="mobile-design instadiet wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.7s" style="visibility: hidden; animation-duration: 2s; animation-delay: 0.7s; animation-name: none;">
+      <div class="container">
+        <div class="number">
+          <h2 class="number-title">06</h2>
+          <p class="number-text">Mobile Designs</p>
+        </div>
+        <div class="designs">
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile1.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile2.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile3.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile4.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile5.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile6.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile7.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile8.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile9.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile10.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile11.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile12.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile13.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile14.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div class="mobile-frame">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile15.png" alt="">
+              </div>
+            </div>
+            <div class="mobile-frame d-none d-md-block d-sm-block">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Mobile-Frame.svg" alt="">
+              <div class="image">
+                <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/mobile16.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Mobile Design -->
+
+    <!-- Start Thanks -->
+    <section class="thanks text-center wow fadeInUp" data-wow-duration="2s" style="visibility: hidden; animation-duration: 2s; animation-name: none;">
+      <div class="container">
+        <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Logo-Symbol.svg" alt="">
+        <h2><span>Thanks</span><br>For Watching</h2>
+      </div>
+    </section>
+    <!-- End Thanks -->
+
+    <!-- Start Work Together -->
+    <section id="work-together">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 offset-lg-2 col-md-6">
+            <p>Have a project?</p>
+            <h3>Let’s Work Together</h3>
+          </div>
+          <div class="col-lg-5 offset-lg-0 col-md-5 offset-md-1">
+            <a href="mailto:biz@eslamelshereef.com?subject=Business%20Inquiry" class="btn talk">Let's Talk!</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Work Together -->
+
+    <!-- Start latest Projects -->
+    <div id="latest-projects" class="text-center">
+      <div class="container">
+        <h2>More Projects…</h2>
+        <div class="owl-carousel owl-theme boxes owl-loaded owl-drag" id="owl-slider">
+          
+          
+          
+          
+        <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1640px;"><div class="owl-item active" style="width: 360px; margin-right: 50px;"><a href="http://eslamelshereef.com/mlvk.html" class="box">
+            <div class="wow fadeInUp" data-wow-duration="2s" style="visibility: hidden; animation-duration: 2s; animation-name: none;">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/MLVK-small.png" class="img-fluid" alt="MLVK">
+            </div>
+          </a></div><div class="owl-item active" style="width: 360px; margin-right: 50px;"><a href="http://eslamelshereef.com/curtis.html" class="box">
+            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.4s" style="visibility: hidden; animation-duration: 2s; animation-delay: 0.4s; animation-name: none;">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Curtis-small.png" class="img-fluid" alt="Curtis">
+            </div>
+          </a></div><div class="owl-item active" style="width: 360px; margin-right: 50px;"><a href="http://eslamelshereef.com/okanagan.html" class="box">
+            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.8s" style="visibility: hidden; animation-duration: 2s; animation-delay: 0.8s; animation-name: none;">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Okanagan-small.png" class="img-fluid" alt="Okanagan">
+            </div>
+          </a></div><div class="owl-item" style="width: 360px; margin-right: 50px;"><a href="http://eslamelshereef.com/fansaved.html" class="box">
+            <div class="wow fadeInUp" data-wow-duration="2s" style="visibility: hidden; animation-duration: 2s; animation-name: none;">
+              <img src="./Eslam El-Shereef Portfolio _ Instadiet_files/Fansaved-small.png" class="img-fluid" alt="Fansaved">
+            </div>
+          </a></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots disabled"></div></div>
+      </div>
+    </div>
+    <!-- End latest Projects -->
+
+    <!-- Start Footer -->
+    <footer id="main-footer" class="text-center">
+      <div class="social-icons">
+        <a href="https://dribbble.com/eslam-elshereef" target="_blank">Dribbble</a>
+        <a href="https://www.behance.net/eslamelshereef" target="_blank">Behance</a>
+        <a href="https://www.instagram.com/eslamwebby/" target="_blank">Instagram</a>
+      </div>
+      <p>© 2019 - Eslam ElShereef</p>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Start Scroll-to-top -->
+    <div class="scroll-to-top text-center">
+      <svg width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.5 21.5V1.5" stroke="white"></path>
+        <path d="M1.5 8.5L8.5 1.5L15.5 8.5" stroke="white" stroke-linecap="square"></path>
+      </svg>
+    </div>
+    <!-- End Scroll-to-top -->
+
+    <!-- jquery.js -->
+    <script src="./Eslam El-Shereef Portfolio _ Instadiet_files/jquery-3.4.1.min.js"></script>
+    <!-- popper.js -->
+    <script src="./Eslam El-Shereef Portfolio _ Instadiet_files/popper.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="./Eslam El-Shereef Portfolio _ Instadiet_files/bootstrap.min.js"></script>
+    <!-- Owl Carousel -->
+    <script src="./Eslam El-Shereef Portfolio _ Instadiet_files/owl.carousel.min.js"></script>
+    <script src="./Eslam El-Shereef Portfolio _ Instadiet_files/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+    <!-- my javascript file -->
+    <script src="./Eslam El-Shereef Portfolio _ Instadiet_files/main.js"></script>
+  
+
+</body></html>
