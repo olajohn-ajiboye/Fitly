@@ -13,6 +13,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    "& a": {
+      textDecoration: "none",
+    },
   },
   appBar: {
     display: "flex",
@@ -53,10 +56,10 @@ const Appbar = ({ onMobileMenuClick }: AppBarProps) => {
               <MenuIcon onClick={onMobileMenuClick} />
             </Hidden>
           </IconButton>
-          <Typography variant="h6" className={title}>
-            News
-          </Typography>
-          <StyledButton color="inherit">Login</StyledButton>
+          <Typography variant="h6" className={title}></Typography>
+          <StyledButton color="inherit">
+            <a href="/login">Login</a>
+          </StyledButton>
         </Toolbar>
       </AppBar>
       <Toolbar />
