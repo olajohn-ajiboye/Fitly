@@ -1,9 +1,10 @@
-export function useLocalStorage<T>(key: string, value?: any) {
-  const item = localStorage.getItem(key) as string;
-  const getItem = () => (JSON.parse(item) as T) ?? null;
+import { CurrentUser } from "../../services/firestore";
+export function useLocalStorage<T = CurrentUser>(key: string, value?: any) {
+  const item = localStorage.getItem(key) as any;
+  const getItem = () => JSON.parse(item) as T;
   const setItem = () => localStorage.setItem(key, JSON.stringify(value));
   const removeItem = () => localStorage.removeItem(key);
-  console.log(item);
+
   return {
     getItem,
     setItem,

@@ -2,15 +2,13 @@ import React from "react";
 import { makeStyles, styled } from "@material-ui/core/styles";
 import { Avatar, Link, Slide, Paper, Typography } from "@material-ui/core";
 
-import { CurrentUser } from "../services/firestore";
-import { useLocalStorage } from "../app/hooks/useLocalStorage";
-
 import scale from "./../assets/scale.svg";
 import height from "./../assets/height.svg";
 import diet from "./../assets/healthy.svg";
 import healthy from "./../assets/roast-turkey.svg";
 
 import Icon from "./Styles/Icons";
+import { CurrentUser } from "../services/firestore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,11 +53,11 @@ const StyledLink = styled(Link)({
 
 interface AppBarProps {
   onMobileMenuClick: () => void;
+  user?: CurrentUser;
 }
-const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
+
+const SideBar = ({ onMobileMenuClick, user }: AppBarProps) => {
   const { root, title, typo } = useStyles();
-  const { getItem } = useLocalStorage<CurrentUser>("user");
-  const user = getItem();
 
   return (
     <Slide direction="down" in={true} mountOnEnter unmountOnExit>

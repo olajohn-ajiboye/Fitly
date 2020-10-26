@@ -26,7 +26,6 @@ export interface CurrentUser {
 }
 
 export const loginWithPop = async (): Promise<CurrentUser> => {
-  console.log("displayName");
   try {
     await firebase.auth().signInWithPopup(provider);
     const { displayName, email, photoURL } = firebase.auth().currentUser!;
