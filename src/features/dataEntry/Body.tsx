@@ -34,9 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default () => {
-  const { body, balance, input, root, title } = useStyles();
-
-  const setWeight = () => {};
+  const { body, root, title } = useStyles();
 
   return (
     <>

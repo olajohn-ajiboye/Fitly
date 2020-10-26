@@ -1,5 +1,4 @@
 import * as firebase from "firebase/app";
-import { useHistory } from "react-router-dom";
 
 import "firebase/firestore";
 import "firebase/auth";
@@ -17,7 +16,7 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+
 var provider = new firebase.auth.GoogleAuthProvider();
 
 export interface CurrentUser {
