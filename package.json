@@ -49,6 +49,7 @@
   "devDependencies": {
     "@material-ui/icons": "^4.9.1",
     "@types/styled-components": "^5.1.4",
+    "eslint-config-netflix": "^2.0.0",
     "styled-components": "^5.2.0"
   }
 }

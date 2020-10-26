@@ -23,6 +23,7 @@ function App() {
   useEffect(() => {
     const user = getItem();
     setUser(user ?? DEFAULT_USER);
+    // eslint-disable-next-line
   }, []);
   return (
     <>

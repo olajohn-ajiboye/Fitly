@@ -4781,6 +4781,11 @@ escodegen@^1.11.0, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-config-netflix@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-netflix/-/eslint-config-netflix-2.0.0.tgz#06dc4c8f7f6eb51084b4666c6db2d36e03196d77"
+  integrity sha512-q3wEF+P1Ff1Nt18GcS7Y9EygPRxqEjoVEqrs1QjeSNW/7RwORtslrREECWyK0RZGcjHG0PqZOlH6mYShZHD40Q==
+
 eslint-config-react-app@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-5.2.1.tgz#698bf7aeee27f0cea0139eaef261c7bf7dd623df"
