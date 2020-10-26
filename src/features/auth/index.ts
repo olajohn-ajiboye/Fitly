@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk } from "../../app/store";
 import { RootState } from "../../app/rootReducer";
 import { CurrentUser, loginWithPop, signOut } from "../../services/firestore";
+import { useLocalStorage } from "../../app/hooks/useLocalStorage";
 
 interface AuthState {
   isAuth: boolean;
@@ -35,11 +36,9 @@ export const authSlice = createSlice({
       const { displayName, email, photoURL } = action.payload;
       state.currentUser = { displayName, email, photoURL };
       state.isAuth = true;
-      console.log(state.currentUser);
     },
     logOut: (state) => {
       state.isAuth = false;
-      console.log(state.currentUser);
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     // incrementByAmount: (state, action: PayloadAction<number>) => {
@@ -69,6 +68,8 @@ export const { login, logOut } = authSlice.actions;
 export const loginAsync = (): AppThunk => async (dispatch) => {
   try {
     const currentUser = await loginWithPop();
+    const { setItem } = useLocalStorage<CurrentUser>("user", currentUser);
+    setItem();
     dispatch(login(currentUser));
   } catch (error) {
     console.log(error);
@@ -78,6 +79,8 @@ export const loginAsync = (): AppThunk => async (dispatch) => {
 export const logOutAsync = (): AppThunk => async (dispatch) => {
   try {
     await signOut();
+    const { removeItem } = useLocalStorage<CurrentUser>("user");
+    removeItem();
     dispatch(logOut());
   } catch (error) {
     console.log(error);

@@ -1,4 +1,6 @@
 import * as firebase from "firebase/app";
+import { useHistory } from "react-router-dom";
+
 import "firebase/firestore";
 import "firebase/auth";
 
@@ -25,10 +27,11 @@ export interface CurrentUser {
 }
 
 export const loginWithPop = async (): Promise<CurrentUser> => {
+  console.log("displayName");
   try {
     await firebase.auth().signInWithPopup(provider);
     const { displayName, email, photoURL } = firebase.auth().currentUser!;
-    console.log(displayName, email, photoURL);
+
     return { displayName, email, photoURL };
   } catch (error) {
     console.log(error);
