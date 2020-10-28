@@ -1,23 +1,21 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+
 import { Button } from "@material-ui/core";
 
-import { loginAsync, logOutAsync } from "../features/auth";
+import { AppContext } from "../app/context";
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const signin = useContext(AppContext)!.login;
+  const logout = useContext(AppContext)!.signOut;
 
-  const login = () => {
-    dispatch(loginAsync());
-    history ? history.push("/page") : window.location.replace("/page");
+  const login = async () => {
+    await signin();
   };
 
   return (
     <div>
       <Button onClick={() => login()}> Login</Button>
-      <Button onClick={() => dispatch(logOutAsync())}> Out</Button>
+      <Button onClick={() => logout()}> Out</Button>
     </div>
   );
 }

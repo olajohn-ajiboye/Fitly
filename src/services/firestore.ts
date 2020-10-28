@@ -29,7 +29,6 @@ export const loginWithPop = async (): Promise<CurrentUser> => {
   try {
     await firebase.auth().signInWithPopup(provider);
     const { displayName, email, photoURL } = firebase.auth().currentUser!;
-
     return { displayName, email, photoURL };
   } catch (error) {
     console.log(error);

@@ -41,12 +41,12 @@ export default function Layout({
         <div className={root}>
           <Grid container className={container} spacing={2}>
             <Grid item xs lg={3}>
-              <Hidden xsDown={!active}>
+              <Hidden mdDown={!active}>
                 <SideBar onMobileMenuClick={onMobileMenuClick} user={user} />
               </Hidden>
             </Grid>
             {/* Main */}
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12} lg={9}>
               <SummaryNav />
               <Chart />
               <Motivation />

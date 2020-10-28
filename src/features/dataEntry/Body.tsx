@@ -7,9 +7,8 @@ import weight from "../../assets/balance.svg";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      flexGrow: 0,
       boxShadow: "0 8px 16px 0 #BDC9D7",
-      marginTop: 20,
       textAlign: "center",
     },
     title: {
@@ -38,7 +37,7 @@ export default () => {
 
   return (
     <>
-      <Grid item xs={4} className={root}>
+      <Grid item xs={6} lg={4} className={root}>
         <Typography variant="h6" className={title}>
           Weight
         </Typography>
