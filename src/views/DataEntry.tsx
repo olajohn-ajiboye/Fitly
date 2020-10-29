@@ -9,9 +9,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+      marginTop: 20,
+    },
+    item: {
+      boxShadow: "0 8px 16px 0 #BDC9D7",
     },
     paper: {
-      padding: theme.spacing(2),
       textAlign: "center",
       color: theme.palette.text.secondary,
     },
@@ -28,23 +31,26 @@ export default ({ onMobileMenuClick }: PageProps) => {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={3}>
+        <Grid item xs lg={3}>
           <SideBar onMobileMenuClick={onMobileMenuClick} />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} lg={9}>
           <Grid container spacing={2}>
             <Body />
-            <Grid item xs={6}>
+            <Grid item xs={6} lg={4} className={classes.item}>
               <Paper className={classes.paper}>xs=6</Paper>
             </Grid>
-            <Grid item xs={4}>
-              <Paper className={classes.paper}>xs=3</Paper>
+            <Grid item xs={6} lg={4} className={classes.item}>
+              X4
             </Grid>
-            <Grid item xs={4}>
-              <Paper className={classes.paper}>xs=3</Paper>
+            <Grid item xs={6} lg={4} className={classes.item}>
+              X4
             </Grid>
-            <Grid item xs={4}>
-              <Paper className={classes.paper}>xs=3</Paper>
+            <Grid item xs={6} lg={4} className={classes.item}>
+              X4
+            </Grid>
+            <Grid item xs={6} lg={4} className={classes.item}>
+              X4
             </Grid>
           </Grid>
         </Grid>

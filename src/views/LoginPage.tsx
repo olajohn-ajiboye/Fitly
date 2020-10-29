@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
 
-import { loginAsync, logOutAsync } from "../features/auth";
+import { loginAsync, logOutAsync } from "../features/auth/index";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export default function LoginPage() {
   return (
     <div>
       <Button onClick={() => login()}> Login</Button>
-      <Button onClick={() => dispatch(logOutAsync())}> Out</Button>
+      <Button onClick={() => logOutAsync()}> Out</Button>
     </div>
   );
 }

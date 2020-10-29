@@ -16,6 +16,8 @@ import { currentUser } from "../features/auth";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: theme.spacing(2),
+    color: theme.palette.text.secondary,
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
@@ -35,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-around",
-    width: "100%",
-    marginTop: "1rem",
+    padding: "10px",
+    borderBottom: "1px white solid",
+    width: "calc(100% + 10px)",
   },
   typo: {
     textTransform: "capitalize",
@@ -46,10 +48,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 const StyledLink = styled(Typography)({
   display: "flex",
+  color: "inherit",
   alignItems: "center",
   paddingLeft: "10px",
   lineHeight: "50px",
-  color: "black",
   borderBottom: "1px white solid",
   width: "calc(100% + 10px)",
 });
