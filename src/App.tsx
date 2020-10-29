@@ -1,53 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+// components
 import { AppBar } from "./components";
 import { LandingPage, LoginPage, MainLayout, DataEntry } from "./views";
-import { useLocalStorage } from "./app/hooks/useLocalStorage";
-import { CurrentUser } from "./services/firestore";
 
-const DEFAULT_USER: CurrentUser = {
-  displayName: "",
-  photoURL: "",
-  email: "",
-};
+// methods
+import { getCurrentUserAsync, currentUser } from "./features/auth";
+
 function App() {
   const [active, setActive] = useState<boolean>(false);
-  const [user, setUser] = useState<CurrentUser>(DEFAULT_USER);
-  const { getItem } = useLocalStorage<CurrentUser>("user");
+  const user = useSelector(currentUser);
+  const dispatch = useDispatch();
 
   const onMobileMenuClick = () => {
     setActive(!active);
   };
 
   useEffect(() => {
-    const user = getItem();
-    setUser(user ?? DEFAULT_USER);
-  }, []);
+    dispatch(getCurrentUserAsync());
+  }, [dispatch]);
+
   return (
     <>
-      {/* { user ?  <LoginPage /> :()} */}
-      <AppBar onMobileMenuClick={onMobileMenuClick} />
-      <Router>
-        <Switch>
-          <Route path="/start">
-            <LandingPage />
-          </Route>
-          <Route path="/data">
-            <DataEntry onMobileMenuClick={onMobileMenuClick} active={active} />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/page">
-            <MainLayout
-              onMobileMenuClick={onMobileMenuClick}
-              active={active}
-              user={user}
-            />
-          </Route>
-        </Switch>
-      </Router>
+      {!user?.displayName ? (
+        <LoginPage />
+      ) : (
+        <Router>
+          <AppBar onMobileMenuClick={onMobileMenuClick} />
+          <Switch>
+            <Route path="/start">
+              <LandingPage />
+            </Route>
+            <Route path="/data">
+              <DataEntry
+                onMobileMenuClick={onMobileMenuClick}
+                active={active}
+              />
+            </Route>
+            <Route path="/login">
+              <LoginPage />
+            </Route>
+            <Route path="/page">
+              <MainLayout
+                onMobileMenuClick={onMobileMenuClick}
+                active={active}
+              />
+            </Route>
+          </Switch>
+        </Router>
+      )}
     </>
   );
 }

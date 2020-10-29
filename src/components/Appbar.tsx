@@ -9,6 +9,7 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +59,7 @@ const Appbar = ({ onMobileMenuClick }: AppBarProps) => {
           </IconButton>
           <Typography variant="h6" className={title}></Typography>
           <StyledButton color="inherit">
-            <a href="/login">Login</a>
+            <Link to="/login">Login</Link>
           </StyledButton>
         </Toolbar>
       </AppBar>

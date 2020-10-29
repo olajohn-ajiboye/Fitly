@@ -1,14 +1,17 @@
 import React from "react";
+import { useSelector, shallowEqual } from "react-redux";
 import { makeStyles, styled } from "@material-ui/core/styles";
-import { Avatar, Link, Slide, Paper, Typography } from "@material-ui/core";
+import { Avatar, Slide, Paper, Typography } from "@material-ui/core";
+import { Link as Route } from "react-router-dom";
 
 import scale from "./../assets/scale.svg";
 import height from "./../assets/height.svg";
 import diet from "./../assets/healthy.svg";
 import healthy from "./../assets/roast-turkey.svg";
-
 import Icon from "./Styles/Icons";
-import { CurrentUser } from "../services/firestore";
+
+// methods
+import { currentUser } from "../features/auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 5,
   },
 }));
-const StyledLink = styled(Link)({
+const StyledLink = styled(Typography)({
   display: "flex",
   alignItems: "center",
   paddingLeft: "10px",
@@ -53,11 +56,11 @@ const StyledLink = styled(Link)({
 
 interface AppBarProps {
   onMobileMenuClick: () => void;
-  user?: CurrentUser;
 }
 
-const SideBar = ({ onMobileMenuClick, user }: AppBarProps) => {
+const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
   const { root, title, typo } = useStyles();
+  const { displayName, photoURL } = useSelector(currentUser, shallowEqual);
 
   return (
     <Slide direction="down" in={true} mountOnEnter unmountOnExit>
@@ -66,27 +69,30 @@ const SideBar = ({ onMobileMenuClick, user }: AppBarProps) => {
           <div className={title}>
             <Typography variant="h6" className={typo}>
               {" "}
-              {user?.displayName}{" "}
+              {displayName}{" "}
             </Typography>
-            <Avatar src={user?.photoURL ?? ""} alt="user" />
+            <Avatar src={photoURL ?? ""} alt="user" />
           </div>
-          <StyledLink href="#" variant="body2">
-            <Icon src={scale} alt="scale" /> Weight
-          </StyledLink>
-          <StyledLink href="#" variant="body2">
+          <Route to="/data">
+            <StyledLink variant="body2">
+              <Icon src={scale} alt="scale" /> Weight
+            </StyledLink>
+          </Route>
+
+          <StyledLink variant="body2">
             <Icon src={height} alt="body" /> Body
           </StyledLink>
-          <StyledLink href="#" variant="body2">
+          <StyledLink variant="body2">
             <Icon src={healthy} alt="healthy" />
             Body <Icon src={diet} alt="diet" />
           </StyledLink>
-          <StyledLink href="#" variant="body2">
+          <StyledLink variant="body2">
             <Icon src={scale} alt="scale" /> Weight
           </StyledLink>
-          <StyledLink href="#" variant="body2">
+          <StyledLink variant="body2">
             <Icon src={height} alt="body" /> Body
           </StyledLink>
-          <StyledLink href="#" variant="body2">
+          <StyledLink variant="body2">
             <Icon src={diet} alt="diet" /> Weight
           </StyledLink>
         </nav>

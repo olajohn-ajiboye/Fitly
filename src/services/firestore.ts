@@ -29,10 +29,9 @@ export const loginWithPop = async (): Promise<CurrentUser> => {
   try {
     await firebase.auth().signInWithPopup(provider);
     const { displayName, email, photoURL } = firebase.auth().currentUser!;
-
     return { displayName, email, photoURL };
   } catch (error) {
-    console.log(error);
+    console.warn(error);
     return error;
   }
 };
@@ -40,9 +39,10 @@ export const loginWithPop = async (): Promise<CurrentUser> => {
 export const signOut = async () => {
   try {
     await firebase.auth().signOut();
-    console.log("Outtted");
   } catch (error) {
-    console.log(error);
+    console.warn(error);
     return error;
   }
 };
+
+export { firebase };
