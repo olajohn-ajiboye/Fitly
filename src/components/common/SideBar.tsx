@@ -63,7 +63,9 @@ interface AppBarProps {
 
 const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
   const { root, title, typo } = useStyles();
-  const { displayName, photoURL } = useSelector(currentUser);
+  const displayName = useSelector(currentUser)?.displayName;
+  const photoURL = useSelector(currentUser)?.photoURL;
+
   const [addFast] = useMutation<any>(ADD_FAST);
   const dispatch = useDispatch();
 

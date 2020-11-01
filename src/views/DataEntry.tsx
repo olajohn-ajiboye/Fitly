@@ -19,14 +19,14 @@ interface PageProps {
   active?: boolean;
 }
 
-export default ({ onMobileMenuClick, active }: PageProps) => {
+export default ({ onMobileMenuClick }: PageProps) => {
   const { root } = useStyles();
 
   return (
     <div className={root}>
       <Grid container spacing={3} justify='center'>
         <Grid item xs lg={2} sm={2}>
-          <Hidden xsDown={!active}>
+          <Hidden xsDown={true}>
             <SideBar onMobileMenuClick={onMobileMenuClick} />
           </Hidden>
         </Grid>

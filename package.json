@@ -5,7 +5,6 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@apollo/react-hooks": "^4.0.0",
-    "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.11.0",
     "@material-ui/pickers": "^3.2.10",
     "@reduxjs/toolkit": "^1.2.5",
@@ -18,7 +17,6 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.6",
-    "@types/react-swipe": "^6.0.0",
     "apollo": "^2.31.0",
     "apollo-boost": "^0.4.9",
     "date-fns": "1.x",
@@ -26,17 +24,13 @@
     "firebase-admin": "^9.3.0",
     "firebase-functions": "^3.11.0",
     "graphql": "^15.4.0",
-    "history": "^5.0.0",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-swipe": "^6.0.4",
-    "react-swipeable": "^5.5.1",
     "react-swipeable-views": "^0.13.9",
-    "swipe-js-iso": "^2.1.5",
     "typescript": "~3.8.2"
   },
   "scripts": {

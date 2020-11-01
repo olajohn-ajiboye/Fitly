@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // components
 import { AppBar } from './components';
 import { LandingPage, LoginPage, MainLayout, DataEntry } from './views';
 
 // methods
-import { getCurrentUserAsync, isAuth } from './features/auth';
+import { isAuth, getCurrentUserAsync } from './features/auth';
+import {} from 'react-redux';
 
 function App() {
   const [active, setActive] = useState<boolean>(false);
-  const authed = useSelector(isAuth);
-
+  const user = useSelector(isAuth);
   const dispatch = useDispatch();
 
   const onMobileMenuClick = () => {
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      {!authed ? (
+      {!user ? (
         <LoginPage />
       ) : (
         <Router>

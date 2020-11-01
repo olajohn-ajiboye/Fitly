@@ -1,26 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppThunk } from "../../app/store";
-import { RootState } from "../../app/rootReducer";
-import { CurrentUser, loginWithPop, signOut } from "../../services/firestore";
-import { useLocalStorage } from "../../app/hooks/useLocalStorage";
+import { AppThunk } from '../../app/store';
+import { RootState } from '../../app/rootReducer';
+import { CurrentUser, loginWithPop, signOut } from '../../services/firestore';
+import { useLocalStorage } from '../../app/hooks/useLocalStorage';
 
 interface AuthState {
   isAuth: boolean;
-  currentUser: CurrentUser;
+  currentUser: CurrentUser | null;
 }
 
 const initialState: AuthState = {
   isAuth: false,
   currentUser: {
-    displayName: "",
-    email: "",
-    photoURL: "",
+    displayName: '',
+    email: '',
+    photoURL: '',
   },
 };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     login: (state, action: PayloadAction<CurrentUser>) => {
@@ -30,9 +30,13 @@ export const authSlice = createSlice({
     },
     logOut: (state) => {
       state.isAuth = false;
+      state.currentUser = null;
     },
     getCurrentUser: (state, action: PayloadAction<CurrentUser>) => {
       state.currentUser = action.payload;
+      if (action.payload.displayName) {
+        state.isAuth = true;
+      }
     },
   },
 });
@@ -42,7 +46,7 @@ export const { getCurrentUser, login, logOut } = authSlice.actions;
 export const loginAsync = (): AppThunk => async (dispatch) => {
   try {
     const currentUser = await loginWithPop();
-    const { setItem } = useLocalStorage<CurrentUser>("user", currentUser);
+    const { setItem } = useLocalStorage<CurrentUser>('user', currentUser);
     setItem();
     dispatch(login(currentUser));
   } catch (error) {
@@ -52,8 +56,9 @@ export const loginAsync = (): AppThunk => async (dispatch) => {
 
 export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
   try {
-    const { getItem } = useLocalStorage<CurrentUser>("user");
-    dispatch(getCurrentUser(getItem()));
+    const { getItem } = useLocalStorage<CurrentUser>('user');
+    const user = getCurrentUser(getItem());
+    dispatch(user);
   } catch (error) {
     console.log(error);
   }
@@ -62,7 +67,7 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 export const logOutAsync = (): AppThunk => async (dispatch) => {
   try {
     await signOut();
-    const { removeItem } = useLocalStorage<CurrentUser>("user");
+    const { removeItem } = useLocalStorage<CurrentUser>('user');
     removeItem();
     dispatch(logOut());
   } catch (error) {
