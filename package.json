@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.2.5",
+    "@apollo/react-hooks": "^4.0.0",
     "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.11.0",
     "@material-ui/pickers": "^3.2.10",
@@ -16,10 +18,16 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.6",
+    "apollo": "^2.31.0",
+    "apollo-boost": "^0.4.9",
     "date-fns": "1.x",
     "firebase": "^7.24.0",
+    "firebase-admin": "^9.3.0",
+    "firebase-functions": "^3.11.0",
+    "graphql": "^15.4.0",
     "history": "^5.0.0",
     "react": "^16.13.1",
+    "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
@@ -30,7 +38,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "gen": "apollo client:codegen --tagName=gql --target=typescript types"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.19.0",
     "@material-ui/icons": "^4.9.1",
     "@types/styled-components": "^5.1.4",
     "eslint-config-netflix": "^2.0.0",

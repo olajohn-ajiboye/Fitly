@@ -1,59 +1,62 @@
-import React from "react";
-import { useSelector, shallowEqual } from "react-redux";
-import { makeStyles, styled } from "@material-ui/core/styles";
-import { Avatar, Slide, Paper, Typography } from "@material-ui/core";
-import { Link as Route } from "react-router-dom";
+import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import { makeStyles, styled } from '@material-ui/core/styles';
+import { Avatar, Slide, Paper, Typography } from '@material-ui/core';
+import { Link as Route } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 
-import scale from "./../assets/scale.svg";
-import height from "./../assets/height.svg";
-import diet from "./../assets/healthy.svg";
-import healthy from "./../assets/roast-turkey.svg";
-import Icon from "./Styles/Icons";
+import scale from './../assets/scale.svg';
+import height from './../assets/height.svg';
+import diet from './../assets/healthy.svg';
+import healthy from './../assets/roast-turkey.svg';
+import Icon from './Styles/Icons';
 
 // methods
-import { currentUser } from "../features/auth";
+import { currentUser } from '../features/auth';
+import { GET_FAST } from '../graphql/queries/getFast';
+import { getUser_fitly_fast } from '../graphql/queries/types/getUser';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: theme.spacing(2),
     color: theme.palette.text.secondary,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    backgroundColor: "#DADAE0",
-    "& img ": {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    backgroundColor: '#DADAE0',
+    '& img ': {
       width: 25,
       height: 25,
       margin: 10,
     },
-    "& .MuiAvatar-img": {
-      display: "inline-block",
-      borderRadius: "50%",
+    '& .MuiAvatar-img': {
+      display: 'inline-block',
+      borderRadius: '50%',
       width: 45,
       height: 45,
     },
   },
   title: {
-    display: "flex",
-    alignItems: "center",
-    padding: "10px",
-    borderBottom: "1px white solid",
-    width: "calc(100% + 10px)",
+    display: 'flex',
+    alignItems: 'center',
+    padding: '10px',
+    borderBottom: '1px white solid',
+    width: 'calc(100% + 10px)',
   },
   typo: {
-    textTransform: "capitalize",
+    textTransform: 'capitalize',
     marginRight: 5,
   },
 }));
 const StyledLink = styled(Typography)({
-  display: "flex",
-  color: "inherit",
-  alignItems: "center",
-  paddingLeft: "10px",
-  lineHeight: "50px",
-  borderBottom: "1px white solid",
-  width: "calc(100% + 10px)",
+  display: 'flex',
+  color: 'black',
+  alignItems: 'center',
+  paddingLeft: '10px',
+  lineHeight: '50px',
+  borderBottom: '1px white solid',
+  width: 'calc(100% + 10px)',
 });
 
 interface AppBarProps {
@@ -61,41 +64,43 @@ interface AppBarProps {
 }
 
 const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
+  const { loading, error, data } = useQuery<getUser_fitly_fast>(GET_FAST);
+
   const { root, title, typo } = useStyles();
   const { displayName, photoURL } = useSelector(currentUser, shallowEqual);
 
   return (
-    <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+    <Slide direction='down' in={true} mountOnEnter unmountOnExit>
       <Paper onClick={onMobileMenuClick}>
         <nav className={root}>
           <div className={title}>
-            <Typography variant="h6" className={typo}>
-              {" "}
-              {displayName}{" "}
+            <Typography variant='h6' className={typo}>
+              {' '}
+              {displayName}{' '}
             </Typography>
-            <Avatar src={photoURL ?? ""} alt="user" />
+            <Avatar src={photoURL ?? ''} alt='user' />
           </div>
-          <Route to="/data">
-            <StyledLink variant="body2">
-              <Icon src={scale} alt="scale" /> Weight
+          <Route to='/data'>
+            <StyledLink variant='body2'>
+              <Icon src={scale} alt='scale' /> Weight
             </StyledLink>
           </Route>
 
-          <StyledLink variant="body2">
-            <Icon src={height} alt="body" /> Body
+          <StyledLink variant='body2'>
+            <Icon src={height} alt='body' /> Body
           </StyledLink>
-          <StyledLink variant="body2">
-            <Icon src={healthy} alt="healthy" />
-            Body <Icon src={diet} alt="diet" />
+          <StyledLink variant='body2'>
+            <Icon src={healthy} alt='healthy' />
+            Body <Icon src={diet} alt='diet' />
           </StyledLink>
-          <StyledLink variant="body2">
-            <Icon src={scale} alt="scale" /> Weight
+          <StyledLink variant='body2'>
+            <Icon src={scale} alt='scale' /> Weight
           </StyledLink>
-          <StyledLink variant="body2">
-            <Icon src={height} alt="body" /> Body
+          <StyledLink variant='body2'>
+            <Icon src={height} alt='body' /> Body
           </StyledLink>
-          <StyledLink variant="body2">
-            <Icon src={diet} alt="diet" /> Weight
+          <StyledLink variant='body2'>
+            <Icon src={diet} alt='diet' /> Weight
           </StyledLink>
         </nav>
       </Paper>
