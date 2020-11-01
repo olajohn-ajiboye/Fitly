@@ -8,14 +8,14 @@ export type Fast = Omit<addFast_insert_fitly_fast_one, '__typename' | 'id'>;
 
 const initialState: { fast: Fast } = {
   fast: {
-    end_time: '2020-10-31T22:44:10.35273',
-    feeling: 'HAPPYLIKS',
-    start_time: '2020-10-31T22:44:10.35273',
-    user_id: '2020-10-31T22:44:10.35273',
+    end_time: '',
+    feeling: '',
+    start_time: '',
+    user_id: '',
   },
 };
 
-export const fastSlice = createSlice({
+export const dayDataSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -25,7 +25,7 @@ export const fastSlice = createSlice({
   },
 });
 
-export const { addNewFast } = fastSlice.actions;
+export const { addNewFast } = dayDataSlice.actions;
 
 export const addFastAsync = (
   payload: addFast_insert_fitly_fast_one
@@ -44,4 +44,4 @@ export const addFastAsync = (
 
 export const fastData = (state: RootState) => state.dayData.fast;
 
-export default fastSlice.reducer;
+export default dayDataSlice.reducer;
