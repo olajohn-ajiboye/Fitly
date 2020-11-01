@@ -12,11 +12,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   isAuth: false,
-  currentUser: {
-    displayName: '',
-    email: '',
-    photoURL: '',
-  },
+  currentUser: null,
 };
 
 export const authSlice = createSlice({

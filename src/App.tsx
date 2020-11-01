@@ -8,7 +8,6 @@ import { LandingPage, LoginPage, MainLayout, DataEntry } from './views';
 
 // methods
 import { isAuth, getCurrentUserAsync } from './features/auth';
-import {} from 'react-redux';
 
 function App() {
   const [active, setActive] = useState<boolean>(false);
