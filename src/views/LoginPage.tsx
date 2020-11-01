@@ -1,16 +1,16 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button } from '@material-ui/core';
 
-import { loginAsync, logOutAsync } from "../features/auth/index";
+import { loginAsync, logOutAsync } from '../features/auth/index';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
 
   const login = async () => {
     await dispatch(loginAsync());
-    if (window.location.pathname.includes("/login")) {
-      window.location.replace("/");
+    if (window.location.pathname.includes('/login')) {
+      window.location.replace('/');
     }
   };
 

@@ -1,4 +1,4 @@
-import { CurrentUser } from "../../services/firestore";
+import { CurrentUser } from '../../services/firestore';
 export function useLocalStorage<T = CurrentUser>(key: string, value?: any) {
   const item = localStorage.getItem(key) as any;
 

@@ -1,23 +1,23 @@
-import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Grid, Hidden } from "@material-ui/core";
+import React from 'react';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { Grid, Hidden } from '@material-ui/core';
 
-import { Chart } from "../features/chart";
-import { SummaryNav } from "../features/currentDay";
-import { SideBar } from "../components";
-import { Motivation } from "../features/motivation";
+import { Chart } from '../features/chart';
+import { SummaryNav } from '../features/currentDay';
+import { SideBar } from '../components';
+import { Motivation } from '../features/motivation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
       padding: theme.spacing(2),
-      textAlign: "center",
+      textAlign: 'center',
       color: theme.palette.text.secondary,
     },
     container: {
-      display: "flex",
-      justifyContent: "space-between",
+      display: 'flex',
+      justifyContent: 'space-between',
     },
   })
 );

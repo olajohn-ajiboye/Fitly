@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 // components
-import { AppBar } from "./components";
-import { LandingPage, LoginPage, MainLayout, DataEntry } from "./views";
+import { AppBar } from './components';
+import { LandingPage, LoginPage, MainLayout, DataEntry } from './views';
 
 // methods
-import { getCurrentUserAsync, currentUser } from "./features/auth";
+import { getCurrentUserAsync, currentUser } from './features/auth';
 
 function App() {
   const [active, setActive] = useState<boolean>(false);
@@ -30,22 +30,22 @@ function App() {
         <Router>
           <AppBar onMobileMenuClick={onMobileMenuClick} />
           <Switch>
-            <Route exact path="/">
+            <Route exact path='/'>
               <MainLayout
                 onMobileMenuClick={onMobileMenuClick}
                 active={active}
               />
             </Route>
-            <Route path="/start">
+            <Route path='/start'>
               <LandingPage />
             </Route>
-            <Route path="/data">
+            <Route path='/data'>
               <DataEntry
                 onMobileMenuClick={onMobileMenuClick}
                 active={active}
               />
             </Route>
-            <Route path="/login">
+            <Route path='/login'>
               <LoginPage />
             </Route>
           </Switch>
