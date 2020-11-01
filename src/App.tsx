@@ -30,6 +30,12 @@ function App() {
         <Router>
           <AppBar onMobileMenuClick={onMobileMenuClick} />
           <Switch>
+            <Route exact path="/">
+              <MainLayout
+                onMobileMenuClick={onMobileMenuClick}
+                active={active}
+              />
+            </Route>
             <Route path="/start">
               <LandingPage />
             </Route>
@@ -41,12 +47,6 @@ function App() {
             </Route>
             <Route path="/login">
               <LoginPage />
-            </Route>
-            <Route path="/page">
-              <MainLayout
-                onMobileMenuClick={onMobileMenuClick}
-                active={active}
-              />
             </Route>
           </Switch>
         </Router>

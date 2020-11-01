@@ -10,7 +10,7 @@ export default function LoginPage() {
   const login = async () => {
     await dispatch(loginAsync());
     if (window.location.pathname.includes("/login")) {
-      window.location.replace("/page");
+      window.location.replace("/");
     }
   };
 
