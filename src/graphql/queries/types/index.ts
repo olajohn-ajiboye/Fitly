@@ -11,7 +11,6 @@ export interface getUser_fitly_fast {
   __typename: "fitly_fast";
   id: any;
   user_id: any;
-  day: any;
   feeling: string;
 }
 

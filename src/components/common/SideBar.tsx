@@ -1,20 +1,20 @@
 import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useMutation } from '@apollo/client';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import { Avatar, Slide, Paper, Typography } from '@material-ui/core';
 import { Link as Route } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
 
-import scale from './../assets/scale.svg';
-import height from './../assets/height.svg';
-import diet from './../assets/healthy.svg';
-import healthy from './../assets/roast-turkey.svg';
-import Icon from './Styles/Icons';
+import scale from '../../assets/scale.svg';
+import height from '../../assets/height.svg';
+import diet from '../../assets/healthy.svg';
+import healthy from '../../assets/roast-turkey.svg';
+import Icon from '../Styles/Icons';
 
 // methods
-import { currentUser } from '../features/auth';
-import { GET_FAST } from '../graphql/queries/getFast';
-import { getUser_fitly_fast } from '../graphql/queries/types/getUser';
+import { ADD_FAST } from '../../graphql/mutations';
+import { addFastAsync } from '../../features/dataEntry/dataEntrySlice';
+import { currentUser } from '../../features/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,17 +64,22 @@ interface AppBarProps {
 }
 
 const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
-  const { loading, error, data } = useQuery<getUser_fitly_fast>(GET_FAST);
-
   const { root, title, typo } = useStyles();
-  const { displayName, photoURL } = useSelector(currentUser, shallowEqual);
+  const { displayName, photoURL } = useSelector(currentUser);
+  const [addFast] = useMutation<any>(ADD_FAST);
+  const dispatch = useDispatch();
+
+  const dispatchFast = async () => {
+    const { data } = await addFast();
+    if (data) dispatch(addFastAsync(data));
+  };
 
   return (
     <Slide direction='down' in={true} mountOnEnter unmountOnExit>
       <Paper onClick={onMobileMenuClick}>
         <nav className={root}>
           <div className={title}>
-            <Typography variant='h6' className={typo}>
+            <Typography variant='h6' className={typo} onClick={dispatchFast}>
               {' '}
               {displayName}{' '}
             </Typography>
