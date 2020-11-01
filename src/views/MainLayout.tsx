@@ -33,13 +33,13 @@ export default function Layout({ onMobileMenuClick, active }: LayoutProps) {
     <>
       <div className={root}>
         <Grid container className={container} spacing={2}>
-          <Grid item xs lg={3}>
+          <Grid item xs lg={2} sm={2}>
             <Hidden xsDown={!active}>
               <SideBar onMobileMenuClick={onMobileMenuClick} />
             </Hidden>
           </Grid>
           {/* Main */}
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={10} lg={10}>
             <SummaryNav />
             <Chart />
             <Motivation />

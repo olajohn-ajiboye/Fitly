@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     backgroundColor: '#DADAE0',
-    '& img ': {
+    '& img': {
       width: 25,
       height: 25,
       margin: 10,
@@ -41,8 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: '10px',
-    borderBottom: '1px white solid',
-    width: 'calc(100% + 10px)',
+    width: 'calc(100% - 20px)',
   },
   typo: {
     textTransform: 'capitalize',
@@ -55,7 +54,6 @@ const StyledLink = styled(Typography)({
   alignItems: 'center',
   paddingLeft: '10px',
   lineHeight: '50px',
-  borderBottom: '1px white solid',
   width: 'calc(100% + 10px)',
 });
 

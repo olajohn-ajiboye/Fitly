@@ -7,11 +7,12 @@ import { AppBar } from './components';
 import { LandingPage, LoginPage, MainLayout, DataEntry } from './views';
 
 // methods
-import { getCurrentUserAsync, currentUser } from './features/auth';
+import { getCurrentUserAsync, isAuth } from './features/auth';
 
 function App() {
   const [active, setActive] = useState<boolean>(false);
-  const user = useSelector(currentUser);
+  const authed = useSelector(isAuth);
+
   const dispatch = useDispatch();
 
   const onMobileMenuClick = () => {
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <>
-      {!user?.displayName ? (
+      {!authed ? (
         <LoginPage />
       ) : (
         <Router>

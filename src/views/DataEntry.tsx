@@ -1,22 +1,15 @@
-import React from "react";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Paper, Grid } from "@material-ui/core";
+import React from 'react';
+import { Grid, Hidden } from '@material-ui/core';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
-import { Body } from "../features/dataEntry";
-import { SideBar } from "../components";
+import { SideBar, VerticalDataCarousel } from '../components';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
       marginTop: 20,
-    },
-    item: {
-      boxShadow: "0 8px 16px 0 #BDC9D7",
-    },
-    paper: {
-      textAlign: "center",
-      color: theme.palette.text.secondary,
+      padding: theme.spacing(2),
     },
   })
 );
@@ -25,34 +18,20 @@ interface PageProps {
   onMobileMenuClick: () => void;
   active?: boolean;
 }
-export default ({ onMobileMenuClick }: PageProps) => {
-  const classes = useStyles();
+
+export default ({ onMobileMenuClick, active }: PageProps) => {
+  const { root } = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs lg={3}>
-          <SideBar onMobileMenuClick={onMobileMenuClick} />
+    <div className={root}>
+      <Grid container spacing={3} justify='center'>
+        <Grid item xs lg={2} sm={2}>
+          <Hidden xsDown={!active}>
+            <SideBar onMobileMenuClick={onMobileMenuClick} />
+          </Hidden>
         </Grid>
-        <Grid item xs={12} lg={9}>
-          <Grid container spacing={2}>
-            <Body />
-            <Grid item xs={6} lg={4} className={classes.item}>
-              <Paper className={classes.paper}>xs=6</Paper>
-            </Grid>
-            <Grid item xs={6} lg={4} className={classes.item}>
-              X4
-            </Grid>
-            <Grid item xs={6} lg={4} className={classes.item}>
-              X4
-            </Grid>
-            <Grid item xs={6} lg={4} className={classes.item}>
-              X4
-            </Grid>
-            <Grid item xs={6} lg={4} className={classes.item}>
-              X4
-            </Grid>
-          </Grid>
+        <Grid item xs={12} sm={10} lg={10}>
+          <VerticalDataCarousel />
         </Grid>
       </Grid>
     </div>
