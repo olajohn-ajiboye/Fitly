@@ -79,10 +79,10 @@ export default function VerticalTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0}>
-          <WorkOut />
+          <Weight />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Weight />
+          <WorkOut />
         </TabPanel>
         <TabPanel value={value} index={2}>
           <Diet />

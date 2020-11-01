@@ -18,3 +18,11 @@ export const ADD_FAST = gql`
     }
   }
 `;
+
+export const ADD_WEIGHT = gql`
+  mutation addWeight($weight: Int!) {
+    insert_fitly_current_day(objects: { weight: $weight }) {
+      affected_rows
+    }
+  }
+`;
