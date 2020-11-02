@@ -28,11 +28,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 		'& img': {
 			height: 25,
 			width: 25,
-			margin: 0,
+			margin: 5,
+		},
+		'& .MuiTab-root': {
+			textTransform: 'capitalize',
+		},
+		'& .MuiTabs-scrollable': {
+			justifyContent: 'space-evenly',
 		},
 	},
 	tabs: {
 		borderRight: `1px solid ${theme.palette.divider}`,
+		textTransform: 'capitalize',
+		color: 'rgb(198, 211, 231)',
 	},
 }))
 
@@ -66,11 +74,12 @@ export default function VerticalTabs() {
 				aria-label="Vertical tabs example"
 				className={classes.tabs}
 			>
-				<Tab icon={<Icon src={balance} alt="diet" />} {...a11yProps(0)} />
-				<Tab icon={<Icon src={diet} alt="diet" />} {...a11yProps(1)} />
-				<Tab icon={<Icon src={fast} alt="fast" />} {...a11yProps(2)} />
-				<Tab icon={<Icon src={workout} alt="workout" />} {...a11yProps(3)} />
-				<Tab icon={<Icon src={balance} alt="diet" />} {...a11yProps(4)} />
+				<Tab label="Weight" icon={<Icon src={balance} alt="diet" />} {...a11yProps(0)} />
+				<Tab label="Diet" icon={<Icon src={diet} alt="diet" />} {...a11yProps(1)} />
+				<Tab label="Fast" icon={<Icon src={fast} alt="fast" />} {...a11yProps(2)} />
+				<Tab label="Workout" icon={<Icon src={workout} alt="workout" />} {...a11yProps(3)} />
+				<Tab label="Diet" icon={<Icon src={balance} alt="diet" />} {...a11yProps(4)} />
+				<Tab label="Diet" icon={<Icon src={balance} alt="diet" />} {...a11yProps(4)} />
 			</Tabs>
 			<SwipeableViews
 				axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

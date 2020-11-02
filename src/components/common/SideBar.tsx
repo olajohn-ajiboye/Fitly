@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 			width: 35,
 			height: 35,
 			margin: 20,
-			border: '1px solid white',
 		},
 		'& .MuiAvatar-img': {
 			display: 'inline-block',

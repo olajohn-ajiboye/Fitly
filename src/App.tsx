@@ -11,21 +11,22 @@ import { LandingPage, LoginPage, MainLayout, DataEntry } from './views'
 import { isAuth, getCurrentUserAsync } from './features/auth'
 
 const theme = createMuiTheme({
+	typography: {
+		fontFamily: "'Poppins', sans-serif",
+		fontWeightBold: 'bold',
+	},
+
+	palette: {
+		text: {
+			primary: 'rgb(198, 211, 231)',
+			secondary: '#00000',
+		},
+	},
 	overrides: {
 		MuiPaper: {
 			root: {
 				backgroundColor: 'rgb(29, 38, 54)',
 				backgroundImage: 'linear-gradient(to right, rgba(13, 230, 255, 0.15) 0%, rgba(201, 189, 174, 0) 25%)',
-			},
-		},
-		MuiTypography: {
-			root: {
-				color: 'rgb(198, 211, 231);',
-				fontFamily: "'Poppins', sans-serif",
-			},
-			paragraph: {
-				color: 'rgb(198, 211, 231);',
-				fontFamily: "'Poppins', sans-serif",
 			},
 		},
 	},
