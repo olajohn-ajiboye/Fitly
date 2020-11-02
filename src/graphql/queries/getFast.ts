@@ -12,3 +12,15 @@ export const GET_FAST = gql`
     }
   }
 `;
+
+export const GET_CURRENT_WEIGHT = gql`
+  query getCurrentWeight($user_id: uuid!, $day_start: timestamptz!) {
+    fitly_current_day(
+      where: { user_id: { _eq: $user_id }, day_start: { _eq: $day_start } }
+    ) {
+      id
+      weight
+      day_start
+    }
+  }
+`;

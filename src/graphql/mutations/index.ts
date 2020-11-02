@@ -20,8 +20,10 @@ export const ADD_FAST = gql`
 `;
 
 export const ADD_WEIGHT = gql`
-  mutation addWeight($weight: Int!) {
-    insert_fitly_current_day(objects: { weight: $weight }) {
+  mutation addWeight($weight: Int!, $start: timestamptz!, $user_id: uuid!) {
+    insert_fitly_current_day(
+      objects: { weight: $weight, day_start: $start, user_id: $user_id }
+    ) {
       affected_rows
     }
   }
