@@ -26,7 +26,6 @@ const theme = createMuiTheme({
 		MuiPaper: {
 			root: {
 				backgroundColor: 'rgb(29, 38, 54)',
-				backgroundImage: 'linear-gradient(to right, rgba(13, 230, 255, 0.15) 0%, rgba(201, 189, 174, 0) 25%)',
 			},
 		},
 	},

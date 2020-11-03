@@ -7,23 +7,28 @@
 // GraphQL mutation operation: addWeight
 // ====================================================
 
-export interface addWeight_insert_fitly_current_day {
+export interface addWeight_update_fitly_current_day_returning {
+  __typename: "fitly_current_day";
+  weight: number;
+}
+
+export interface addWeight_update_fitly_current_day {
   __typename: "fitly_current_day_mutation_response";
   /**
-   * number of affected rows by the mutation
+   * data of the affected rows by the mutation
    */
-  affected_rows: number;
+  returning: addWeight_update_fitly_current_day_returning[];
 }
 
 export interface addWeight {
   /**
-   * insert data into the table: "fitly.current_day"
+   * update data of the table: "fitly.current_day"
    */
-  insert_fitly_current_day: addWeight_insert_fitly_current_day | null;
+  update_fitly_current_day: addWeight_update_fitly_current_day | null;
 }
 
 export interface addWeightVariables {
   weight: number;
-  start: any;
   user_id: any;
+  entry_date: any;
 }

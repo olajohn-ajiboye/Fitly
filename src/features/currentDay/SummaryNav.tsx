@@ -1,15 +1,15 @@
 import React from 'react'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Grid, Paper, Typography } from '@material-ui/core'
-// import { useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 
 import { fastData, weight } from '../dataEntry/dataEntrySlice'
-// import { GET_CURRENT_WEIGHT } from '../../graphql/queries/getFast'
-// import {
-// 	getCurrentWeight_fitly_current_day,
-// 	getCurrentWeightVariables,
-// } from '../../graphql/queries/types/getCurrentWeight'
+import { GET_CURRENT_WEIGHT } from '../../graphql/queries'
+import {
+	getCurrentWeight_fitly_current_day,
+	getCurrentWeightVariables,
+} from '../../graphql/queries/types/getCurrentWeight'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,15 +36,19 @@ const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
 	const { start_time, end_time } = useSelector(fastData)
 	const newWeight = useSelector(weight, shallowEqual)
-	// const dispatch = useDispatch()
-	// const { loading, error, data } = useQuery<any, getCurrentWeightVariables>(GET_CURRENT_WEIGHT, {
-	// 	variables: {
-	// 		user_id: '6c1e05a7-8339-4a29-9a86-715a4e5ea14c',
-	// 		day_start: '2020-11-01T20:40:39.543636+00:00',
-	// 	},
-	// })
 
-	// console.log(data?.fitly_current_day[0]?.weight)
+	const dispatch = useDispatch()
+	const { loading, error, data } = useQuery<getCurrentWeight_fitly_current_day, getCurrentWeightVariables>(
+		GET_CURRENT_WEIGHT,
+		{
+			variables: {
+				user_id: '6c1e05a7-8339-4a29-9a86-715a4e5ea14c',
+				entry_date: '2020-11-03',
+			},
+		}
+	)
+
+	console.log(data)
 
 	// useEffect(() => {
 	// 	dispatch(getCurrentWeightAsync(data?.weight))

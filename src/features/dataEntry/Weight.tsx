@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux'
 
 // methods
 import { addWeightAsync } from './dataEntrySlice'
-import { ADD_WEIGHT } from '../../graphql/mutations/index'
-import { addWeightVariables, addWeight_insert_fitly_current_day } from '../../graphql/mutations/types/addWeight'
+import { UPDATE_WEIGHT } from '../../graphql/mutations/index'
+import { updateWeightVariables, updateWeight } from '../../graphql/mutations/types/updateWeight'
+import usePrevious from '../../app/hooks/usePrevious'
 
 // use styles
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,28 +40,37 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
+const date = new Date().toISOString().split('T')[0]
+
 export default () => {
 	const { root, title } = useStyles()
-	const [weight, setWeight] = useState(90)
+	const [weight, setWeight] = useState(90.0)
+	const previousWeight = usePrevious(weight)
+
 	const dispatch = useDispatch()
 
-	const [addNewWeight, { data }] = useMutation<addWeight_insert_fitly_current_day, addWeightVariables>(ADD_WEIGHT, {
+	const [addNewWeight, { data }] = useMutation<updateWeight, updateWeightVariables>(UPDATE_WEIGHT, {
 		variables: {
 			weight,
-			start: new Date(Date.now()),
 			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
+			entry_date: date,
 		},
 	})
 
-	console.log(data)
-	const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		setWeight(parseInt(target.value))
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const target = e.currentTarget as HTMLInputElement
+		setWeight(+target.valueAsNumber.toFixed(3))
 	}
 
 	const updateWeight = async (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			await addNewWeight()
+			// prevent updating when weight value has not changed
+			if (previousWeight === weight) return
+			await addNewWeight().catch((error) => {
+				console.log(error)
+			})
+
 			dispatch(addWeightAsync(weight))
 		}
 	}

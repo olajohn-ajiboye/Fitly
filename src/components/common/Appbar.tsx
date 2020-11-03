@@ -65,10 +65,12 @@ const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 						</Hidden>
 					</IconButton>
 					<Typography variant="h6" className={title}></Typography>
-					<StyledButton color="inherit">
-						<AddTask />
-						<Link to="/data"> Add</Link>
-					</StyledButton>
+					<Link to="/data">
+						<StyledButton color="inherit">
+							<AddTask />
+							Add
+						</StyledButton>
+					</Link>
 					<StyledButton color="inherit" className={logout} onClick={() => dispatch(logOutAsync())}>
 						Sign Out
 					</StyledButton>

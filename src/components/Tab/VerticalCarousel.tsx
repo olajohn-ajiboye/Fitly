@@ -34,14 +34,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 			textTransform: 'capitalize',
 		},
 		'& .MuiTabs-scrollable': {
-			margin: '20px 0',
+			marginTop: 20,
 			justifyContent: 'space-evenly',
+		},
+		'& .MuiTab-wrapper': {
+			alignItems: 'end',
 		},
 	},
 	tabs: {
 		borderRight: `1px solid ${theme.palette.divider}`,
 		textTransform: 'capitalize',
 		color: 'rgb(198, 211, 231)',
+		width: '30%',
+		fontWeight: 600,
 	},
 }))
 

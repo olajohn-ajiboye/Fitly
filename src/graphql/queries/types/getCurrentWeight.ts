@@ -10,8 +10,7 @@
 export interface getCurrentWeight_fitly_current_day {
   __typename: "fitly_current_day";
   id: any;
-  weight: number | null;
-  day_start: any;
+  weight: number;
 }
 
 export interface getCurrentWeight {
@@ -23,5 +22,5 @@ export interface getCurrentWeight {
 
 export interface getCurrentWeightVariables {
   user_id: any;
-  day_start: any;
+  entry_date: any;
 }
