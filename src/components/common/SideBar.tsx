@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useMutation } from '@apollo/client'
 import { makeStyles, styled } from '@material-ui/core/styles'
 import { Avatar, Slide, Paper, Typography } from '@material-ui/core'
-import { Link as Route } from 'react-router-dom'
 
 import scale from '../../assets/scale.svg'
 import height from '../../assets/height.svg'
 import diet from '../../assets/healthy.svg'
 import healthy from '../../assets/roast-turkey.svg'
+import bench from '../../assets/bench.svg'
 import Icon from '../Styles/Icons'
 
 // methods
@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 	typo: {
 		textTransform: 'capitalize',
 		marginRight: 5,
+		fontWeight: 700,
 	},
 }))
 const StyledLink = styled(Typography)({
@@ -53,6 +54,7 @@ const StyledLink = styled(Typography)({
 	paddingLeft: '10px',
 	lineHeight: '50px',
 	width: 'calc(100% + 10px)',
+	fontWeight: 500,
 })
 
 interface AppBarProps {
@@ -83,19 +85,6 @@ const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
 						</Typography>
 						<Avatar src={photoURL ?? ''} alt="user" />
 					</div>
-					<Route to="/data">
-						<StyledLink variant="body2">
-							<Icon src={scale} alt="scale" /> Weight
-						</StyledLink>
-					</Route>
-
-					<StyledLink variant="body2">
-						<Icon src={height} alt="body" /> Body
-					</StyledLink>
-					<StyledLink variant="body2">
-						<Icon src={healthy} alt="healthy" />
-						Body <Icon src={diet} alt="diet" />
-					</StyledLink>
 					<StyledLink variant="body2">
 						<Icon src={scale} alt="scale" /> Weight
 					</StyledLink>
@@ -103,7 +92,15 @@ const SideBar = ({ onMobileMenuClick }: AppBarProps) => {
 						<Icon src={height} alt="body" /> Body
 					</StyledLink>
 					<StyledLink variant="body2">
-						<Icon src={diet} alt="diet" /> Weight
+						<Icon src={healthy} alt="healthy" />
+						Diet <Icon src={diet} alt="diets" />
+					</StyledLink>
+					<StyledLink variant="body2">
+						<Icon src={bench} alt="workouts" /> Workouts
+					</StyledLink>
+					<StyledLink variant="body2">
+						<Icon src={diet} alt="fasts" />
+						Fast
 					</StyledLink>
 				</nav>
 			</Paper>

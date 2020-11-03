@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			textTransform: 'capitalize',
 		},
 		'& .MuiTabs-scrollable': {
+			margin: '20px 0',
 			justifyContent: 'space-evenly',
 		},
 	},
@@ -79,7 +80,6 @@ export default function VerticalTabs() {
 				<Tab label="Fast" icon={<Icon src={fast} alt="fast" />} {...a11yProps(2)} />
 				<Tab label="Workout" icon={<Icon src={workout} alt="workout" />} {...a11yProps(3)} />
 				<Tab label="Diet" icon={<Icon src={balance} alt="diet" />} {...a11yProps(4)} />
-				<Tab label="Diet" icon={<Icon src={balance} alt="diet" />} {...a11yProps(4)} />
 			</Tabs>
 			<SwipeableViews
 				axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -97,9 +97,6 @@ export default function VerticalTabs() {
 				</TabPanel>
 				<TabPanel value={value} index={3}>
 					<Fast />
-				</TabPanel>
-				<TabPanel value={value} index={4}>
-					Item Five
 				</TabPanel>
 			</SwipeableViews>
 		</Paper>

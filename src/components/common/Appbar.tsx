@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 		color: '#2A338F',
 		backgroundColor: '#EF5FA2',
 		'&:hover': {
-			backgroundColor: '#EF5FA2',
+			backgroundColor: 'rgb(198, 211, 231)',
 		},
 	},
 	title: {
@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
 const StyledButton = styled(Button)({
 	backgroundColor: '#EF5FA2',
 	textTransform: 'capitalize',
+	'&:hover': {
+		backgroundColor: 'rgb(198, 211, 231)',
+	},
 })
 
 interface AppBarProps {

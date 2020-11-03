@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 			alignItems: 'center',
 		},
-		typo: {},
+		typo: {
+			fontWeight: 700,
+			fontSize: '2rem',
+		},
 	})
 )
 

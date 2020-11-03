@@ -13,7 +13,7 @@ import { isAuth, getCurrentUserAsync } from './features/auth'
 const theme = createMuiTheme({
 	typography: {
 		fontFamily: "'Poppins', sans-serif",
-		fontWeightBold: 'bold',
+		fontWeightBold: 700,
 	},
 
 	palette: {
