@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 // methods
 import { addWeightAsync } from './dataEntrySlice'
 import { UPDATE_WEIGHT } from '../../graphql/mutations/index'
-import { updateWeightVariables, updateWeight } from '../../graphql/mutations/types/updateWeight'
+import { updateWeightVariables, updateWeight as updateWeightQuery } from '../../graphql/mutations/types/updateWeight'
 import usePrevious from '../../app/hooks/usePrevious'
 
 // use styles
@@ -49,7 +49,7 @@ export default () => {
 
 	const dispatch = useDispatch()
 
-	const [addNewWeight, { data }] = useMutation<updateWeight, updateWeightVariables>(UPDATE_WEIGHT, {
+	const [addNewWeight] = useMutation<updateWeightQuery, updateWeightVariables>(UPDATE_WEIGHT, {
 		variables: {
 			weight,
 			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',

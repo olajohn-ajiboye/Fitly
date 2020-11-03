@@ -7,17 +7,16 @@
 // GraphQL query operation: getCurrentWeight
 // ====================================================
 
-export interface getCurrentWeight_fitly_current_day {
-  __typename: "fitly_current_day";
-  id: any;
-  weight: number;
+export interface getCurrentWeight_fitly_weight {
+  __typename: "fitly_weight";
+  value: any;
 }
 
 export interface getCurrentWeight {
   /**
-   * fetch data from the table: "fitly.current_day"
+   * fetch data from the table: "fitly.weight"
    */
-  fitly_current_day: getCurrentWeight_fitly_current_day[];
+  fitly_weight: getCurrentWeight_fitly_weight[];
 }
 
 export interface getCurrentWeightVariables {

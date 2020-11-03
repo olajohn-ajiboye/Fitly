@@ -1,15 +1,10 @@
 import React from 'react'
-import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Grid, Paper, Typography } from '@material-ui/core'
-import { useQuery } from '@apollo/client'
 
 import { fastData, weight } from '../dataEntry/dataEntrySlice'
-import { GET_CURRENT_WEIGHT } from '../../graphql/queries'
-import {
-	getCurrentWeight_fitly_current_day,
-	getCurrentWeightVariables,
-} from '../../graphql/queries/types/getCurrentWeight'
+import { getCurrentWeightAsync } from '../dataEntry/dataEntrySlice'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -35,24 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
 const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
 	const { start_time, end_time } = useSelector(fastData)
-	const newWeight = useSelector(weight, shallowEqual)
-
+	const newWeight = useSelector(weight)
 	const dispatch = useDispatch()
-	const { loading, error, data } = useQuery<getCurrentWeight_fitly_current_day, getCurrentWeightVariables>(
-		GET_CURRENT_WEIGHT,
-		{
-			variables: {
-				user_id: '6c1e05a7-8339-4a29-9a86-715a4e5ea14c',
-				entry_date: '2020-11-03',
-			},
-		}
+
+	const entry_date = new Date().toISOString().split('T')[0]
+
+	dispatch(
+		getCurrentWeightAsync({
+			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
+			entry_date,
+		})
 	)
-
-	console.log(data)
-
-	// useEffect(() => {
-	// 	dispatch(getCurrentWeightAsync(data?.weight))
-	// }, [dispatch, data])
 
 	return (
 		<Grid container spacing={3} className={root}>

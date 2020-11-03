@@ -16,7 +16,7 @@ export const GET_FAST = gql`
 export const GET_CURRENT_WEIGHT = gql`
 	query getCurrentWeight($user_id: uuid!, $entry_date: date!) {
 		fitly_weight(where: { user_id: { _eq: $user_id }, entry_date: { _eq: $entry_date } }) {
-			weight
+			value
 		}
 	}
 `
