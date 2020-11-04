@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
-import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledInput } from '@material-ui/core'
+import {
+	Paper,
+	Typography,
+	FormControl,
+	FormHelperText,
+	InputAdornment,
+	FilledInput,
+	Snackbar,
+} from '@material-ui/core'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { useMutation } from '@apollo/client'
 import { useDispatch } from 'react-redux'
@@ -36,15 +45,23 @@ const useStyles = makeStyles((theme: Theme) =>
 			textAlign: 'center',
 			color: theme.palette.text.secondary,
 		},
-		input: {},
+		snackbar: {
+			marginTop: '20%',
+		},
 	})
 )
 
 const date = new Date().toISOString().split('T')[0]
 
+function Alert(props: AlertProps) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
 export default () => {
 	const { root, title } = useStyles()
 	const [weight, setWeight] = useState(90.0)
+	const [message, setMessage] = useState('')
+	const [openSnackBar, setOpen] = useState(false)
 	const previousWeight = usePrevious(weight)
 
 	const dispatch = useDispatch()
@@ -67,9 +84,16 @@ export default () => {
 			e.preventDefault()
 			// prevent sending request when weight value has not changed
 			if (previousWeight === weight) return
-			await addNewWeight().catch((error) => {
-				console.log(error)
-			})
+			await addNewWeight()
+				.then(() => {
+					setMessage('Success updated')
+					setOpen(true)
+				})
+				.catch((error) => {
+					setMessage('Error updating')
+					setOpen(true)
+					console.log(error)
+				})
 
 			dispatch(addWeightAsync(weight))
 		}
@@ -96,6 +120,22 @@ export default () => {
 					/>
 					<FormHelperText id="filled-weight-helper-text">Enter Weight</FormHelperText>
 				</FormControl>
+				{/* TODO : toggle message and type of snack bar */}
+				<Snackbar
+					anchorOrigin={{
+						vertical: 'bottom',
+						horizontal: 'right',
+					}}
+					style={{ marginTop: 20 }}
+					autoHideDuration={2000}
+					open={openSnackBar}
+					message={message}
+					onClose={() => setOpen(false)}
+				>
+					<Alert onClose={() => setOpen(false)} severity="error">
+						{message}
+					</Alert>
+				</Snackbar>
 			</Paper>
 		</>
 	)

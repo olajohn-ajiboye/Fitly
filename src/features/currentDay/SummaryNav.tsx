@@ -6,7 +6,6 @@ import { getTodaysWeightAsync, weight, getWeightsAsync, allWeight } from '../dat
 import useWeightDifferential from '../../app/hooks/useWeightDifferential'
 import Up from '@material-ui/icons/TrendingUpRounded'
 import Down from '@material-ui/icons/TrendingDownRounded'
-import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt'
 
 const arrowStyle = (color: string) => {
 	return { color }
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			fontSize: '1.5rem',
 			'& .extra': {
 				display: 'block',
-				fontSize: '1.2rem',
+				fontSize: '1.0rem',
 			},
 		},
 	})
@@ -75,7 +74,7 @@ const SummaryNav = () => {
 							{Math.abs(diff?.by ?? 0.0).toFixed(2)}
 							<br />
 							<br />
-							before <ArrowRightAltIcon /> <span> {diff?.previousWeight}</span>
+							before &rarr; <span> {diff?.previousWeight}</span>
 						</span>
 					</Typography>
 				</Paper>
