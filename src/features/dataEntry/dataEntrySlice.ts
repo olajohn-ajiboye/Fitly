@@ -113,8 +113,6 @@ export const getWeightsAsync = ({ user_id }: getWeightsVariables): AppThunk => a
 		})
 
 		const weights = data?.fitly_weight
-		console.log(weights)
-
 		dispatch(getWeights(weights))
 
 		useEffect(() => {
