@@ -4,8 +4,13 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTodaysWeightAsync, weight, getWeightsAsync, allWeight } from '../dataEntry/dataEntrySlice'
 import useWeightDifferential from '../../app/hooks/useWeightDifferential'
-import Up from '@material-ui/icons/ArrowUpward'
-import Down from '@material-ui/icons/ArrowDownwardOutlined'
+import Up from '@material-ui/icons/TrendingUpRounded'
+import Down from '@material-ui/icons/TrendingDownRounded'
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt'
+
+const arrowStyle = (color: string) => {
+	return { color }
+}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -23,10 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		typo: {
 			fontWeight: 700,
-			fontSize: '2rem',
+			fontSize: '1.5rem',
 			'& .extra': {
 				display: 'block',
-				fontSize: '1.5rem',
+				fontSize: '1.2rem',
 			},
 		},
 	})
@@ -38,8 +43,7 @@ const SummaryNav = () => {
 	const weights = useSelector(allWeight) ?? []
 	const dispatch = useDispatch()
 
-	const entry_date = '2020-11-15'
-	// new Date().toISOString().split('T')[0]
+	const entry_date = new Date().toISOString().split('T')[0]
 	dispatch(
 		getTodaysWeightAsync({
 			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
@@ -55,21 +59,23 @@ const SummaryNav = () => {
 
 	const diff = useWeightDifferential(weights)
 
-	const isDown = diff?.isDown ? <Down /> : <Up />
+	const isDown = diff?.isDown ? <Down style={arrowStyle('green')} /> : <Up style={arrowStyle('red')} />
 
 	return (
 		<Grid container spacing={3} className={root}>
 			<Grid item xs={6} sm={3}>
 				<Paper elevation={0} className={paper}>
 					{' '}
-					<Typography variant="h3" component="h2" className={typo}>
+					<Typography variant="h2" component="h2" className={typo}>
 						{/* if currentDay doesn't have any weight use last available entered weight */}
 						{newWeight ?? weights[0]?.value ?? 90} Kg
 						<span className="extra">
 							{' '}
-							{diff?.by}
 							{isDown}
-							{diff?.previousWeight}
+							{Math.abs(diff?.by ?? 0.0).toFixed(2)}
+							<br />
+							<br />
+							before <ArrowRightAltIcon /> <span> {diff?.previousWeight}</span>
 						</span>
 					</Typography>
 				</Paper>
