@@ -19,15 +19,13 @@ export const ADD_FAST = gql`
 	}
 `
 
-export const UPDATE_WEIGHT = gql`
-	mutation updateWeight($weight: float8!, $user_id: uuid!, $entry_date: date!) {
-		update_fitly_weight(
-			where: { entry_date: { _eq: $entry_date }, user_id: { _eq: $user_id } }
-			_set: { value: $weight }
+export const UPSERT_WEIGHT = gql`
+	mutation upsertWeight($weight: float8!, $user_id: uuid!, $entry_date: date!) {
+		insert_fitly_weight_one(
+			object: { entry_date: $entry_date, user_id: $user_id, value: $weight }
+			on_conflict: { constraint: weight_pkey, update_columns: value }
 		) {
-			returning {
-				value
-			}
+			value
 		}
 	}
 `

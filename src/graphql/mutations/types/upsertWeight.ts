@@ -4,22 +4,23 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getCurrentWeight
+// GraphQL mutation operation: upsertWeight
 // ====================================================
 
-export interface getCurrentWeight_fitly_weight {
+export interface upsertWeight_insert_fitly_weight_one {
   __typename: "fitly_weight";
   value: any;
 }
 
-export interface getCurrentWeight {
+export interface upsertWeight {
   /**
-   * fetch data from the table: "fitly.weight"
+   * insert a single row into the table: "fitly.weight"
    */
-  fitly_weight: getCurrentWeight_fitly_weight[];
+  insert_fitly_weight_one: upsertWeight_insert_fitly_weight_one | null;
 }
 
-export interface getCurrentWeightVariables {
+export interface upsertWeightVariables {
+  weight: any;
   user_id: any;
   entry_date: any;
 }

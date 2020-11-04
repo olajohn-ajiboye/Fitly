@@ -1,24 +1,22 @@
-import React from 'react'
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
-import SwipeableViews from 'react-swipeable-views'
-
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
 import Paper from '@material-ui/core/Paper'
-
-// components
-import Icon from '../Styles/Icons'
-import WorkOut from '../../features/dataEntry/Workouts'
-import Weight from '../../features/dataEntry/Weight'
-import Diet from '../../features/dataEntry/Diet'
-import Fast from '../../features/dataEntry/Fast'
-import { TabPanel } from './TabPanel'
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
+import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
+import React from 'react'
+import SwipeableViews from 'react-swipeable-views'
 
 // icons
 import balance from '../../assets/balance.svg'
-import diet from '../../assets/roast-turkey.svg'
-import fast from '../../assets/carrot.svg'
 import workout from '../../assets/bench.svg'
+import fast from '../../assets/carrot.svg'
+import diet from '../../assets/roast-turkey.svg'
+import Diet from '../../features/dataEntry/Diet'
+import Fast from '../../features/dataEntry/Fast'
+import Weight from '../../features/dataEntry/Weight'
+import WorkOut from '../../features/dataEntry/Workouts'
+// components
+import Icon from '../Styles/Icons'
+import { TabPanel } from './TabPanel'
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {

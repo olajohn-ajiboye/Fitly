@@ -6,8 +6,8 @@ import { useDispatch } from 'react-redux'
 
 // methods
 import { addWeightAsync } from './dataEntrySlice'
-import { UPDATE_WEIGHT } from '../../graphql/mutations/index'
-import { updateWeightVariables, updateWeight as updateWeightQuery } from '../../graphql/mutations/types/updateWeight'
+import { UPSERT_WEIGHT } from '../../graphql/mutations/index'
+import { upsertWeightVariables, upsertWeight as upsertWeightQuery } from '../../graphql/mutations/types/upsertWeight'
 import usePrevious from '../../app/hooks/usePrevious'
 
 // use styles
@@ -49,7 +49,7 @@ export default () => {
 
 	const dispatch = useDispatch()
 
-	const [addNewWeight] = useMutation<updateWeightQuery, updateWeightVariables>(UPDATE_WEIGHT, {
+	const [addNewWeight] = useMutation<upsertWeightQuery, upsertWeightVariables>(UPSERT_WEIGHT, {
 		variables: {
 			weight,
 			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
@@ -65,7 +65,7 @@ export default () => {
 	const updateWeight = async (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
-			// prevent updating when weight value has not changed
+			// prevent sending request when weight value has not changed
 			if (previousWeight === weight) return
 			await addNewWeight().catch((error) => {
 				console.log(error)

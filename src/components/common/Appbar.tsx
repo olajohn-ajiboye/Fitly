@@ -1,10 +1,10 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import { AppBar, Button, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
 import { makeStyles, styled } from '@material-ui/core/styles'
-import { AppBar, Button, Hidden, IconButton, Typography, Toolbar } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu'
 import AddTask from '@material-ui/icons/PostAddTwoTone'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { logOutAsync } from '../../features/auth/index'
 
 const useStyles = makeStyles((theme) => ({

@@ -1,10 +1,8 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Grid, Paper, Typography } from '@material-ui/core'
-
-import { fastData, weight } from '../dataEntry/dataEntrySlice'
-import { getCurrentWeightAsync } from '../dataEntry/dataEntrySlice'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getTodaysWeightAsync, weight, getWeightsAsync, allWeight } from '../dataEntry/dataEntrySlice'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -29,16 +27,22 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
-	const { start_time, end_time } = useSelector(fastData)
 	const newWeight = useSelector(weight)
+	const weights = useSelector(allWeight) ?? []
 	const dispatch = useDispatch()
 
-	const entry_date = new Date().toISOString().split('T')[0]
-
+	const entry_date = '2020-11-15'
+	// new Date().toISOString().split('T')[0]
 	dispatch(
-		getCurrentWeightAsync({
+		getTodaysWeightAsync({
 			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
 			entry_date,
+		})
+	)
+
+	dispatch(
+		getWeightsAsync({
+			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
 		})
 	)
 
@@ -48,20 +52,21 @@ const SummaryNav = () => {
 				<Paper elevation={0} className={paper}>
 					{' '}
 					<Typography variant="h3" component="h2" className={typo}>
-						{newWeight} Kg
+						{/* if currentDay doesn't have any weight use last available entered weight */}
+						{newWeight ?? weights[0]?.value ?? 90} Kg
 					</Typography>
 				</Paper>
 			</Grid>
 			<Grid item xs={6} sm={3}>
 				<Paper elevation={0} className={paper}>
 					{' '}
-					{start_time}
+					{'start_time'}
 				</Paper>
 			</Grid>
 			<Grid item xs={6} sm={3}>
 				<Paper elevation={0} className={paper}>
 					{' '}
-					{end_time}
+					{'end_time'}
 				</Paper>
 			</Grid>
 			<Grid item xs={6} sm={3}>
