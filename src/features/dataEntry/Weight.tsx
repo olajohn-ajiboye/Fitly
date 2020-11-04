@@ -1,17 +1,9 @@
 import React, { useState } from 'react'
-import {
-	Paper,
-	Typography,
-	FormControl,
-	FormHelperText,
-	InputAdornment,
-	FilledInput,
-	Snackbar,
-} from '@material-ui/core'
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
+import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledInput } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { useMutation } from '@apollo/client'
 import { useDispatch } from 'react-redux'
+import SnackBar from '../../components/SnackBar'
 
 // methods
 import { addWeightAsync } from './dataEntrySlice'
@@ -53,10 +45,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const date = new Date().toISOString().split('T')[0]
 
-function Alert(props: AlertProps) {
-	return <MuiAlert elevation={6} variant="filled" {...props} />
-}
-
 export default () => {
 	const { root, title } = useStyles()
 	const [weight, setWeight] = useState(90.0)
@@ -79,6 +67,7 @@ export default () => {
 		setWeight(+target.valueAsNumber.toFixed(3))
 	}
 
+	const onCloseSnackBar = () => setOpen(false)
 	const updateWeight = async (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
@@ -121,21 +110,7 @@ export default () => {
 					<FormHelperText id="filled-weight-helper-text">Enter Weight</FormHelperText>
 				</FormControl>
 				{/* TODO : toggle message and type of snack bar */}
-				<Snackbar
-					anchorOrigin={{
-						vertical: 'bottom',
-						horizontal: 'right',
-					}}
-					style={{ marginTop: 20 }}
-					autoHideDuration={2000}
-					open={openSnackBar}
-					message={message}
-					onClose={() => setOpen(false)}
-				>
-					<Alert onClose={() => setOpen(false)} severity="error">
-						{message}
-					</Alert>
-				</Snackbar>
+				<SnackBar message={message} open={openSnackBar} severity="success" onClose={onCloseSnackBar} />
 			</Paper>
 		</>
 	)
