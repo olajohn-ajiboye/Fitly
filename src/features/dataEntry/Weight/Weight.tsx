@@ -3,13 +3,13 @@ import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledI
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { useMutation } from '@apollo/client'
 import { useDispatch } from 'react-redux'
-import SnackBar from '../../components/SnackBar'
+import SnackBar from '../../../components/SnackBar/SnackBar'
 
 // methods
-import { addWeightAsync } from './dataEntrySlice'
-import { UPSERT_WEIGHT } from '../../graphql/mutations/index'
-import { upsertWeightVariables, upsertWeight as upsertWeightQuery } from '../../graphql/mutations/types/upsertWeight'
-import usePrevious from '../../app/hooks/usePrevious'
+import { addWeightAsync } from '../dataEntrySlice'
+import { UPSERT_WEIGHT } from '../../../graphql/mutations/index'
+import { upsertWeightVariables, upsertWeight as upsertWeightQuery } from '../../../graphql/mutations/types/upsertWeight'
+import usePrevious from '../../../app/hooks/usePrevious'
 
 // use styles
 const useStyles = makeStyles((theme: Theme) =>
@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: theme.spacing(2),
 			textAlign: 'center',
 			marginBottom: 20,
+			'& .MuiAlert-filledSuccess': {
+				backgroundColor: '#4caf50',
+			},
 		},
 		title: {
 			marginBottom: theme.spacing(3),
@@ -110,7 +113,13 @@ export default () => {
 					<FormHelperText id="filled-weight-helper-text">Enter Weight</FormHelperText>
 				</FormControl>
 				{/* TODO : toggle message and type of snack bar */}
-				<SnackBar message={message} open={openSnackBar} severity="success" onClose={onCloseSnackBar} />
+				<SnackBar
+					message={message}
+					open={openSnackBar}
+					severity="success"
+					onClose={onCloseSnackBar}
+					style={{ backgroundColor: 'green' }}
+				/>
 			</Paper>
 		</>
 	)

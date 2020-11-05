@@ -1,5 +1,5 @@
 import Paper from '@material-ui/core/Paper'
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@material-ui/core/styles'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import React from 'react'
@@ -10,43 +10,15 @@ import balance from '../../assets/balance.svg'
 import workout from '../../assets/bench.svg'
 import fast from '../../assets/carrot.svg'
 import diet from '../../assets/roast-turkey.svg'
-import Diet from '../../features/dataEntry/Diet'
-import Fast from '../../features/dataEntry/Fast'
-import Weight from '../../features/dataEntry/Weight'
-import WorkOut from '../../features/dataEntry/Workouts'
-// components
-import Icon from '../Styles/Icons'
-import { TabPanel } from './TabPanel'
+import Diet from '../../features/dataEntry/Diet/Diet'
+import Fast from '../../features/dataEntry/Fast/Fast'
+import Weight from '../../features/dataEntry/Weight/Weight'
+import WorkOut from '../../features/dataEntry/Workout/Workouts'
 
-const useStyles = makeStyles((theme: Theme) => ({
-	root: {
-		flexGrow: 1,
-		display: 'flex',
-		height: '60vh',
-		'& img': {
-			height: 25,
-			width: 25,
-			margin: 5,
-		},
-		'& .MuiTab-root': {
-			textTransform: 'capitalize',
-		},
-		'& .MuiTabs-scrollable': {
-			marginTop: 20,
-			justifyContent: 'space-evenly',
-		},
-		'& .MuiTab-wrapper': {
-			alignItems: 'end',
-		},
-	},
-	tabs: {
-		borderRight: `1px solid ${theme.palette.divider}`,
-		textTransform: 'capitalize',
-		color: 'rgb(198, 211, 231)',
-		width: '30%',
-		fontWeight: 600,
-	},
-}))
+// components
+import Icon from '../Styled/Icons'
+import { TabPanel } from './TabPanel'
+import useStyles from './styles'
 
 function a11yProps(index: any) {
 	return {

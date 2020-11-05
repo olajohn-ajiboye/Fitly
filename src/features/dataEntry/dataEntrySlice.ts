@@ -36,7 +36,7 @@ const initialState: DayData = {
 }
 
 export const dayDataSlice = createSlice({
-	name: 'auth',
+	name: 'dayData',
 	initialState,
 	reducers: {
 		addNewFast: (state, action: PayloadAction<Fast>) => {
@@ -90,6 +90,7 @@ export const getTodaysWeightAsync = ({ user_id, entry_date }: getTodaysWeightVar
 				user_id,
 				entry_date,
 			},
+			fetchPolicy: 'cache-first',
 		})
 
 		const weight = data?.fitly_weight[0]?.value

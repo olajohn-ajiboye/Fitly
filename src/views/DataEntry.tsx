@@ -1,9 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Grid } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 
-import { VerticalDataCarousel } from '../components'
-import { Link } from 'react-router-dom'
+import VerticalDataCarousel from '../components/Carousel/VerticalCarousel'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

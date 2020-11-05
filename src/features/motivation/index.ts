@@ -1,3 +1,3 @@
-export { default as Meals } from "./Meal";
-export { default as Motivation } from "./Motivation";
-export { default as WorkOut } from "./WorkOut";
+export { default as Meals } from './Meal/Meal'
+export { default as Motivation } from './Motive/Motivation'
+export { default as WorkOut } from './Workout/WorkOut'

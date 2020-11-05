@@ -1,40 +1,16 @@
-import { Grid, Paper, Typography } from '@material-ui/core'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import React from 'react'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTodaysWeightAsync, weight, getWeightsAsync, allWeight } from '../dataEntry/dataEntrySlice'
-import useWeightDifferential from '../../app/hooks/useWeightDifferential'
+import { getTodaysWeightAsync, weight, getWeightsAsync, allWeight } from '../../dataEntry/dataEntrySlice'
+import useWeightDifferential from '../../../app/hooks/useWeightDifferential'
 import Up from '@material-ui/icons/TrendingUpRounded'
 import Down from '@material-ui/icons/TrendingDownRounded'
+
+import { useStyles } from './styles'
 
 const arrowStyle = (color: string) => {
 	return { color }
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			flexGrow: 1,
-			textAlign: 'center',
-			padding: theme.spacing(2),
-			color: theme.palette.text.secondary,
-		},
-		paper: {
-			height: 150,
-			display: 'flex',
-			justifyContent: 'center',
-			alignItems: 'center',
-		},
-		typo: {
-			fontWeight: 700,
-			fontSize: '1.5rem',
-			'& .extra': {
-				display: 'block',
-				fontSize: '1.0rem',
-			},
-		},
-	})
-)
 
 const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
@@ -72,9 +48,6 @@ const SummaryNav = () => {
 							{' '}
 							{isDown}
 							{Math.abs(diff?.by ?? 0.0).toFixed(2)}
-							<br />
-							<br />
-							before &rarr; <span> {diff?.previousWeight}</span>
 						</span>
 					</Typography>
 				</Paper>

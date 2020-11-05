@@ -4,7 +4,7 @@ import { Grid, Hidden } from '@material-ui/core'
 
 import { Chart } from '../features/chart'
 import { SummaryNav } from '../features/currentDay'
-import { SideBar } from '../components'
+import SideBar from '../components/SideBar'
 import { Motivation } from '../features/motivation'
 
 const useStyles = makeStyles((theme: Theme) =>

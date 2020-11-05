@@ -2,7 +2,7 @@ import React from 'react'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 import { Snackbar } from '@material-ui/core'
 
-interface SnackBarProps {
+interface SnackBarProps extends AlertProps {
 	open: boolean
 	message: string
 	onClose: any
