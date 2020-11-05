@@ -52,7 +52,7 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Suspense fallback={<CircularProgress />}>
+			<Suspense fallback={<CircularProgress style={{ margin: '50%' }} />}>
 				{!user ? (
 					<LoginPage />
 				) : (

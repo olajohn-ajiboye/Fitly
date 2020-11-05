@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Paper, Typography } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTodaysWeightAsync, weight, getWeightsAsync, allWeight } from '../../dataEntry/dataEntrySlice'
+import { getTodaysWeightAsync, getWeightsAsync, allWeight } from '../../dataEntry/dataEntrySlice'
 import useWeightDifferential from '../../../app/hooks/useWeightDifferential'
 import Up from '@material-ui/icons/TrendingUpRounded'
 import Down from '@material-ui/icons/TrendingDownRounded'
@@ -14,7 +14,6 @@ const arrowStyle = (color: string) => {
 
 const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
-	const newWeight = useSelector(weight)
 	const weights = useSelector(allWeight) ?? []
 	const dispatch = useDispatch()
 
@@ -33,8 +32,7 @@ const SummaryNav = () => {
 	)
 
 	const diff = useWeightDifferential(weights)
-
-	const isDown = diff?.isDown ? <Down style={arrowStyle('green')} /> : <Up style={arrowStyle('red')} />
+	const isDown = diff?.isDown ? <Up style={arrowStyle('red')} /> : <Down style={arrowStyle('green')} />
 
 	return (
 		<Grid container spacing={3} className={root}>
@@ -43,7 +41,7 @@ const SummaryNav = () => {
 					{' '}
 					<Typography variant="h2" component="h2" className={typo}>
 						{/* if currentDay doesn't have any weight use last available entered weight */}
-						{newWeight ?? weights[0]?.value ?? 90} Kg
+						{weights[0]?.value ?? 90} Kg
 						<span className="extra">
 							{' '}
 							{isDown}
