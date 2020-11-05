@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledInput } from '@material-ui/core'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { useMutation } from '@apollo/client'
 import { useDispatch } from 'react-redux'
 import SnackBar from '../../../components/SnackBar/SnackBar'
@@ -10,41 +9,7 @@ import { addWeightAsync } from '../dataEntrySlice'
 import { UPSERT_WEIGHT } from '../../../graphql/mutations/index'
 import { upsertWeightVariables, upsertWeight as upsertWeightQuery } from '../../../graphql/mutations/types/upsertWeight'
 import usePrevious from '../../../app/hooks/usePrevious'
-
-// use styles
-const useStyles = makeStyles((theme: Theme) =>
-	createStyles({
-		root: {
-			flexGrow: 1,
-			padding: theme.spacing(2),
-			textAlign: 'center',
-			marginBottom: 20,
-			'& .MuiAlert-filledSuccess': {
-				backgroundColor: '#4caf50',
-			},
-		},
-		title: {
-			marginBottom: theme.spacing(3),
-		},
-		body: {
-			display: 'flex',
-			justifyContent: 'space-around',
-			'& img ': {
-				width: 30,
-				height: 30,
-				margin: 10,
-			},
-		},
-		balance: {
-			padding: theme.spacing(2),
-			textAlign: 'center',
-			color: theme.palette.text.secondary,
-		},
-		snackbar: {
-			marginTop: '20%',
-		},
-	})
-)
+import { useStyles } from './styles'
 
 const date = new Date().toISOString().split('T')[0]
 
