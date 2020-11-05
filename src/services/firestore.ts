@@ -3,12 +3,12 @@ import * as firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
-const { REACT_APP_FIREBASE_API_KEY, REACT_APP_DATABASE_URL } = process.env
+const { REACT_APP_FIREBASE_API_KEY, REACT_APP_AUTH_DOMAIN } = process.env
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
 	apiKey: REACT_APP_FIREBASE_API_KEY,
-	authDomain: REACT_APP_DATABASE_URL,
+	authDomain: REACT_APP_AUTH_DOMAIN,
 	databaseURL: '',
 	projectId: 'fitly-85a63',
 	storageBucket: 'fitly-85a63.appspot.com',
@@ -25,13 +25,15 @@ export interface CurrentUser {
 	displayName: string | null
 	email: string | null
 	photoURL: string | null
+	uid: string | null
 }
 
 export const loginWithPop = async (): Promise<CurrentUser> => {
 	try {
 		await firebase.auth().signInWithPopup(provider)
-		const { displayName, email, photoURL } = firebase.auth().currentUser!
-		return { displayName, email, photoURL }
+		const { displayName, email, photoURL, uid } = firebase.auth().currentUser!
+		console.log(firebase.auth().currentUser!)
+		return { displayName, email, photoURL, uid }
 	} catch (error) {
 		console.warn(error)
 		return error
