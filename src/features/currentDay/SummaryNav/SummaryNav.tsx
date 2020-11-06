@@ -7,6 +7,7 @@ import Up from '@material-ui/icons/TrendingUpRounded'
 import Down from '@material-ui/icons/TrendingDownRounded'
 
 import { useStyles } from './styles'
+import { currentUser } from '../../auth'
 
 const arrowStyle = (color: string) => {
 	return { color }
@@ -15,19 +16,20 @@ const arrowStyle = (color: string) => {
 const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
 	const weights = useSelector(allWeight) ?? []
+	const user = useSelector(currentUser)
 	const dispatch = useDispatch()
 
 	const entry_date = new Date().toISOString().split('T')[0]
 	dispatch(
 		getTodaysWeightAsync({
-			user_id: '59016c82-a4db-4877-bf39-da135c35e712',
+			user_id: user?.id,
 			entry_date,
 		})
 	)
 
 	dispatch(
 		getWeightsAsync({
-			user_id: '59016c82-a4db-4877-bf39-da135c35e712',
+			user_id: user?.id,
 		})
 	)
 

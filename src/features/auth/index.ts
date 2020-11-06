@@ -20,8 +20,8 @@ export const authSlice = createSlice({
 	initialState,
 	reducers: {
 		login: (state, action: PayloadAction<CurrentUser>) => {
-			const { display_name, email, photo_url, uid } = action.payload
-			state.currentUser = { display_name, email, photo_url, uid }
+			const { display_name, email, photo_url, uid, id } = action.payload
+			state.currentUser = { display_name, email, photo_url, uid, id }
 			state.isAuth = true
 		},
 		logOut: (state) => {

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const defaultUser = { display_name: '', email: '', photo_url: '', uid: '' }
+const defaultUser = { id: '', display_name: '', email: '', photo_url: '', uid: '' }
 
 export default function LoginPage() {
 	const [firebaseUser, setUser] = useState<CurrentUser>(defaultUser)

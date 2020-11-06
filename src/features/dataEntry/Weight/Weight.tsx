@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledInput } from '@material-ui/core'
 import { useMutation } from '@apollo/client'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SnackBar from '../../../components/SnackBar/SnackBar'
 
 // methods
@@ -10,6 +10,7 @@ import { UPSERT_WEIGHT } from '../../../graphql/mutations/index'
 import { upsertWeightVariables, upsertWeight as upsertWeightQuery } from '../../../graphql/mutations/types/upsertWeight'
 import usePrevious from '../../../app/hooks/usePrevious'
 import { useStyles } from './styles'
+import { currentUser } from '../../auth'
 
 const date = new Date().toISOString().split('T')[0]
 
@@ -19,13 +20,14 @@ export default () => {
 	const [message, setMessage] = useState('')
 	const [openSnackBar, setOpen] = useState(false)
 	const previousWeight = usePrevious(weight)
+	const user = useSelector(currentUser)
 
 	const dispatch = useDispatch()
 
 	const [addNewWeight] = useMutation<upsertWeightQuery, upsertWeightVariables>(UPSERT_WEIGHT, {
 		variables: {
 			weight,
-			user_id: '59016c82-a4db-4877-bf39-da135c35e712',
+			user_id: user?.id,
 			entry_date: date,
 		},
 	})

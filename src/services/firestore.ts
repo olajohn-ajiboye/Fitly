@@ -22,6 +22,7 @@ firebase.initializeApp(firebaseConfig)
 var provider = new firebase.auth.GoogleAuthProvider()
 
 export interface CurrentUser {
+	id?: string
 	display_name: string | null
 	email: string | null
 	photo_url: string | null
