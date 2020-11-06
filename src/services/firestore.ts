@@ -22,17 +22,23 @@ firebase.initializeApp(firebaseConfig)
 var provider = new firebase.auth.GoogleAuthProvider()
 
 export interface CurrentUser {
-	displayName: string | null
+	display_name: string | null
 	email: string | null
-	photoURL: string | null
+	photo_url: string | null
 	uid: string | null
 }
 
-export const loginWithPop = async (): Promise<CurrentUser> => {
+export interface FirebaseUser {
+	displayName: string | null
+	email: string | null
+	photoURL: string | null
+	uid: string
+}
+
+export const loginWithPop = async (): Promise<FirebaseUser> => {
 	try {
 		await firebase.auth().signInWithPopup(provider)
 		const { displayName, email, photoURL, uid } = firebase.auth().currentUser!
-		console.log(firebase.auth().currentUser!)
 		return { displayName, email, photoURL, uid }
 	} catch (error) {
 		console.warn(error)

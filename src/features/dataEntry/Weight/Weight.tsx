@@ -25,7 +25,7 @@ export default () => {
 	const [addNewWeight] = useMutation<upsertWeightQuery, upsertWeightVariables>(UPSERT_WEIGHT, {
 		variables: {
 			weight,
-			user_id: 'd64d5a75-edf3-4127-8183-6a02f638a31c',
+			user_id: '59016c82-a4db-4877-bf39-da135c35e712',
 			entry_date: date,
 		},
 	})

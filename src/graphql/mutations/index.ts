@@ -7,7 +7,7 @@ export const ADD_FAST = gql`
 				end_time: "2020-10-31T22:44:10.35273"
 				feeling: "HAPPY"
 				start_time: "2020-10-31T22:44:10.35273"
-				user_id: "d64d5a75-edf3-4127-8183-6a02f638a31c"
+				user_id: "59016c82-a4db-4877-bf39-da135c35e712"
 			}
 		) {
 			end_time
@@ -26,6 +26,21 @@ export const UPSERT_WEIGHT = gql`
 			on_conflict: { constraint: weight_pkey, update_columns: value }
 		) {
 			value
+		}
+	}
+`
+
+export const UPSERT_CURRENT_USER = gql`
+	mutation upsertCurrentUser($display_name: String, $email: String, $uid: String!, $photo_url: String) {
+		insert_fitly_user_one(
+			object: { display_name: $display_name, email: $email, uid: $uid, photo_url: $photo_url }
+			on_conflict: { constraint: user_pkey, update_columns: email, where: { email: { _eq: $email } } }
+		) {
+			id
+			display_name
+			email
+			uid
+			photo_url
 		}
 	}
 `

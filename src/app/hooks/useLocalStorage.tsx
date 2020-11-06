@@ -1,5 +1,5 @@
-import { CurrentUser } from '../../services/firestore'
-export function useLocalStorage<T = CurrentUser>(key: string, value?: any) {
+import { FirebaseUser } from '../../services/firestore'
+export function useLocalStorage<T = FirebaseUser>(key: string, value?: any) {
 	const item = localStorage.getItem(key) as any
 
 	const getItem = () => JSON.parse(item) as T
