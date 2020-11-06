@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Grid, Paper } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { snakeCase } from 'change-case'
 
 import { useMutation } from '@apollo/client'
 import { UPSERT_CURRENT_USER } from '../graphql/mutations'
@@ -11,12 +10,9 @@ import google from '../assets/google.png'
 import Icon from '../components/Styled/Icons'
 
 import { loginAsync } from '../features/auth/index'
-import { loginWithPop, CurrentUser, FirebaseUser } from '../services/firestore'
+import { loginWithPop, CurrentUser } from '../services/firestore'
 
-import {
-	upsertCurrentUser as upsertCurrentUserMutation,
-	upsertCurrentUserVariables,
-} from '../graphql/mutations/types/upsertCurrentUser'
+import { upsertCurrentUser as upsertCurrentUserMutation } from '../graphql/mutations/types/upsertCurrentUser'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

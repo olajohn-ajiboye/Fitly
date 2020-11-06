@@ -34,7 +34,7 @@ export const UPSERT_CURRENT_USER = gql`
 	mutation upsertCurrentUser($display_name: String, $email: String, $uid: String!, $photo_url: String) {
 		insert_fitly_user_one(
 			object: { display_name: $display_name, email: $email, uid: $uid, photo_url: $photo_url }
-			on_conflict: { constraint: user_pkey, update_columns: email, where: { email: { _eq: $email } } }
+			on_conflict: { constraint: user_email_key, update_columns: email }
 		) {
 			id
 			display_name
