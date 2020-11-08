@@ -2,15 +2,15 @@ import React, { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import { CircularProgress, SwipeableDrawer } from '@material-ui/core'
 
 // methods
 import { isAuth, getCurrentUserAsync } from './features/auth'
 
 // components
 import { AppBar } from './components/AppBar'
+import SideBar from './components/Menu'
 
-const DataEntry = lazy(() => import('./views/DataEntry'))
 const LandingPage = lazy(() => import('./views/LandingPage'))
 const MainLayout = lazy(() => import('./views/MainLayout'))
 const LoginPage = lazy(() => import('./views/Login'))
@@ -42,7 +42,7 @@ function App() {
 	const user = useSelector(isAuth)
 	const dispatch = useDispatch()
 
-	const onMobileMenuClick = () => {
+	const onMenuClick = () => {
 		setActive(!active)
 	}
 
@@ -57,17 +57,15 @@ function App() {
 					<LoginPage />
 				) : (
 					<Router>
-						<AppBar onMobileMenuClick={onMobileMenuClick} />
+						<AppBar onMobileMenuClick={onMenuClick} />
 						<Switch>
 							<Route exact path="/">
-								<MainLayout onMobileMenuClick={onMobileMenuClick} active={active} />
+								<MainLayout />
 							</Route>
 							<Route path="/start">
 								<LandingPage />
 							</Route>
-							<Route path="/data">
-								<DataEntry onMobileMenuClick={onMobileMenuClick} active={active} />
-							</Route>
+							<Route path="/data"></Route>
 							<Route path="/login">
 								<LoginPage />
 							</Route>
@@ -75,6 +73,9 @@ function App() {
 					</Router>
 				)}
 			</Suspense>
+			<SwipeableDrawer anchor="left" open={active} onClose={onMenuClick} onOpen={onMenuClick}>
+				<SideBar />
+			</SwipeableDrawer>
 		</ThemeProvider>
 	)
 }

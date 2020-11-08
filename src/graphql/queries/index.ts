@@ -17,6 +17,8 @@ export const GET_TODAYS_WEIGHT = gql`
 	query getTodaysWeight($user_id: uuid!, $entry_date: date!) {
 		fitly_weight(where: { user_id: { _eq: $user_id }, entry_date: { _eq: $entry_date } }) {
 			value
+			entry_date
+			user_id
 		}
 	}
 `

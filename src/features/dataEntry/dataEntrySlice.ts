@@ -22,6 +22,7 @@ interface DayData {
 	fast: Fast
 	weight: number | undefined
 	allWeights: Weight[] | null | undefined
+	modalOpen: boolean
 }
 
 const initialState: DayData = {
@@ -33,6 +34,7 @@ const initialState: DayData = {
 	},
 	weight: 90,
 	allWeights: null,
+	modalOpen: false,
 }
 
 export const dayDataSlice = createSlice({
@@ -54,10 +56,16 @@ export const dayDataSlice = createSlice({
 		getWeights: (state, action: PayloadAction<DayData['allWeights']>) => {
 			state.allWeights = action.payload
 		},
+		showModal: (state) => {
+			state.modalOpen = true
+		},
+		closeModal: (state) => {
+			state.modalOpen = false
+		},
 	},
 })
 
-export const { addNewFast, addNewWeight, getTodaysWeight, getWeights } = dayDataSlice.actions
+export const { addNewFast, addNewWeight, getTodaysWeight, getWeights, showModal, closeModal } = dayDataSlice.actions
 
 export const addFastAsync = (payload: addFast_insert_fitly_fast_one): AppThunk => async (dispatch) => {
 	try {
@@ -72,9 +80,19 @@ export const addFastAsync = (payload: addFast_insert_fitly_fast_one): AppThunk =
 	}
 }
 
-export const addWeightAsync = (payload: number): AppThunk => async (dispatch) => {
+export const addWeightAsync = (weight: number, user_id?: string, entry_date?: string): AppThunk => async (dispatch) => {
 	try {
-		dispatch(addNewWeight(payload))
+		const { data } = useQuery<getTodaysWeightQuery, getTodaysWeightVariables>(GET_TODAYS_WEIGHT, {
+			variables: {
+				user_id,
+				entry_date,
+			},
+			fetchPolicy: 'cache-first',
+		})
+
+		console.log(data)
+
+		dispatch(addNewWeight(weight))
 	} catch (error) {
 		console.log(error)
 	}
@@ -127,5 +145,6 @@ export const getWeightsAsync = ({ user_id }: getWeightsVariables): AppThunk => a
 export const fastData = (state: RootState) => state.dayData.fast
 export const weight = (state: RootState) => state.dayData.weight
 export const allWeight = (state: RootState) => state.dayData.allWeights
+export const modalOpen = (state: RootState) => state.dayData.modalOpen
 
 export default dayDataSlice.reducer
