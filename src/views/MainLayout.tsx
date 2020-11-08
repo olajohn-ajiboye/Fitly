@@ -36,8 +36,8 @@ export default function Layout() {
 				<Modal
 					open={open}
 					onClose={() => dispatch(closeModal())}
-					aria-labelledby="simple-modal-title"
-					aria-describedby="simple-modal-description"
+					aria-labelledby="Enter Data"
+					aria-describedby="Data entry"
 					closeAfterTransition
 					BackdropComponent={Backdrop}
 					BackdropProps={{
@@ -50,11 +50,9 @@ export default function Layout() {
 				</Modal>
 
 				<Grid container className={container} spacing={2}>
-					<Grid item xs lg md sm>
-						<SummaryNav />
-						<Chart />
-						<Motivation />
-					</Grid>
+					<SummaryNav />
+					<Chart />
+					<Motivation />
 				</Grid>
 			</div>
 		</>

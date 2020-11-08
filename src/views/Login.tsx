@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Button, Grid, Paper } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { useMutation } from '@apollo/client'
 import { UPSERT_CURRENT_USER } from '../graphql/mutations'
@@ -32,13 +33,18 @@ const useStyles = makeStyles((theme: Theme) =>
 const defaultUser = { id: '', display_name: '', email: '', photo_url: '', uid: '' }
 
 export default function LoginPage() {
-	const [firebaseUser, setUser] = useState<CurrentUser>(defaultUser)
-	const dispatch = useDispatch()
 	const { root, button } = useStyles()
+	const [firebaseUser, setUser] = useState<CurrentUser>(defaultUser)
+
+	const dispatch = useDispatch()
+	let history = useHistory()
+	let location = useLocation() as any
 
 	const [upsertCurrentUser] = useMutation<upsertCurrentUserMutation, CurrentUser>(UPSERT_CURRENT_USER, {
 		variables: firebaseUser,
 	})
+
+	let { from } = location.state || { from: { pathname: '/' } }
 
 	const login = async () => {
 		try {
@@ -51,10 +57,8 @@ export default function LoginPage() {
 			})
 			const { data } = await upsertCurrentUser()
 			const currentUser = data?.insert_fitly_user_one ?? defaultUser
-			await dispatch(loginAsync(currentUser))
-			if (window.location.pathname.includes('/login')) {
-				window.location.replace('/')
-			}
+			dispatch(loginAsync(currentUser))
+			history.replace(from)
 		} catch (error) {
 			console.log(error)
 		}

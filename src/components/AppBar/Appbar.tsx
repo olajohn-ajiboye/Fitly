@@ -12,6 +12,7 @@ import { showModal } from '../../features/dataEntry/dataEntrySlice'
 
 //  styles
 import { useStyles, StyledButton } from './styles'
+import { useHistory } from 'react-router-dom'
 
 interface AppBarProps {
 	onMobileMenuClick: () => void
@@ -19,6 +20,12 @@ interface AppBarProps {
 const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 	const { root, appBar, menuButton, title, logout } = useStyles()
 	const dispatch = useDispatch()
+	let history = useHistory()
+
+	const signOut = () => {
+		dispatch(logOutAsync())
+		history.push('/')
+	}
 
 	return (
 		<div className={root}>
@@ -35,7 +42,7 @@ const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 						<AddTask />
 						Add
 					</StyledButton>
-					<StyledButton color="inherit" className={logout} onClick={() => dispatch(logOutAsync())}>
+					<StyledButton color="inherit" className={logout} onClick={signOut}>
 						Sign Out
 					</StyledButton>
 				</Toolbar>

@@ -5,12 +5,12 @@ import { RootState } from '../../app/rootReducer'
 import { CurrentUser, signOut } from '../../services/firestore'
 import { useLocalStorage } from '../../app/hooks/useLocalStorage'
 
-interface AuthState {
+export interface AuthState {
 	isAuth: boolean
 	currentUser: CurrentUser | null
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
 	isAuth: false,
 	currentUser: null,
 }
@@ -53,7 +53,6 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 	try {
 		const { getItem } = useLocalStorage<CurrentUser>('user')
 		const user = getCurrentUser(getItem())
-
 		dispatch(user)
 	} catch (error) {
 		console.log(error)
