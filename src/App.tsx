@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { CircularProgress, SwipeableDrawer } from '@material-ui/core'
@@ -55,20 +55,18 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<Suspense fallback={<CircularProgress style={{ margin: '50%', color: 'white' }} />}>
-				<Router>
-					{auth && <AppBar onMobileMenuClick={onMenuClick} />}
-					<Switch>
-						<Route path="/login">
-							<LoginPage />
-						</Route>
-						<Route path="/start">
-							<LandingPage />
-						</Route>
-						<PrivateRoute exact path="/">
-							<MainLayout />
-						</PrivateRoute>
-					</Switch>
-				</Router>
+				{auth && <AppBar onMobileMenuClick={onMenuClick} />}
+				<Switch>
+					<Route path="/login">
+						<LoginPage />
+					</Route>
+					<Route path="/start">
+						<LandingPage />
+					</Route>
+					<PrivateRoute exact path="/">
+						<MainLayout />
+					</PrivateRoute>
+				</Switch>
 			</Suspense>
 			<SwipeableDrawer anchor="left" open={active} onClose={onMenuClick} onOpen={onMenuClick}>
 				<SideBar />

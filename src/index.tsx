@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink } from '@apollo/client'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -28,11 +29,13 @@ const createApolloClient = () => {
 const client = createApolloClient()
 ReactDOM.render(
 	<React.StrictMode>
-		<ApolloProvider client={client}>
-			<Provider store={store}>
-				<App />
-			</Provider>
-		</ApolloProvider>
+		<BrowserRouter>
+			<ApolloProvider client={client}>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</ApolloProvider>
+		</BrowserRouter>
 	</React.StrictMode>,
 
 	document.getElementById('root')

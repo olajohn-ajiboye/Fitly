@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Grid, Paper } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, Redirect } from 'react-router-dom'
 
 import { useMutation } from '@apollo/client'
 import { UPSERT_CURRENT_USER } from '../graphql/mutations'
@@ -10,7 +10,7 @@ import { UPSERT_CURRENT_USER } from '../graphql/mutations'
 import google from '../assets/google.png'
 import Icon from '../components/Styled/Icons'
 
-import { loginAsync } from '../features/auth/index'
+import { loginAsync, getCurrentUserAsync, isAuth } from '../features/auth/index'
 import { loginWithPop, CurrentUser } from '../services/firestore'
 
 import { upsertCurrentUser as upsertCurrentUserMutation } from '../graphql/mutations/types/upsertCurrentUser'
@@ -34,6 +34,7 @@ const defaultUser = { id: '', display_name: '', email: '', photo_url: '', uid: '
 
 export default function LoginPage() {
 	const { root, button } = useStyles()
+	const auth = useSelector(isAuth)
 	const [firebaseUser, setUser] = useState<CurrentUser>(defaultUser)
 
 	const dispatch = useDispatch()
@@ -64,7 +65,17 @@ export default function LoginPage() {
 		}
 	}
 
-	return (
+	useEffect(() => {
+		dispatch(getCurrentUserAsync())
+	}, [dispatch])
+
+	return auth ? (
+		<Redirect
+			to={{
+				pathname: '/',
+			}}
+		/>
+	) : (
 		<Grid container justify="center" className={root}>
 			<Paper>
 				<Grid item>

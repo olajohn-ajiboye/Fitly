@@ -1,17 +1,17 @@
 import { gql } from '@apollo/client'
 
-export const GET_FAST = gql`
-	query getUser {
-		fitly_fast {
-			id
-			user_id
-			feeling
-		}
-		fitly_user(where: { id: { _eq: "6c1e05a7-8339-4a29-9a86-715a4e5ea14c" } }) {
-			display_name
-		}
-	}
-`
+// export const GET_FAST = gql`
+// 	query getUser {
+// 		fitly_fast {
+// 			id
+// 			user_id
+// 			feeling
+// 		}
+// 		fitly_user(where: { id: { _eq: "6c1e05a7-8339-4a29-9a86-715a4e5ea14c" } }) {
+// 			display_name
+// 		}
+// 	}
+// `
 
 export const GET_TODAYS_WEIGHT = gql`
 	query getTodaysWeight($user_id: uuid!, $entry_date: date!) {
@@ -28,6 +28,18 @@ export const GET_WEIGHTS = gql`
 		fitly_weight(where: { user_id: { _eq: $user_id } }, order_by: { entry_date: desc }) {
 			value
 			entry_date
+		}
+	}
+`
+
+export const GET_USER = gql`
+	query getUser($email: String, $uid: String) {
+		fitly_user(where: { uid: { _eq: $uid }, _or: { email: { _eq: $email } } }) {
+			id
+			uid
+			display_name
+			email
+			photo_url
 		}
 	}
 `

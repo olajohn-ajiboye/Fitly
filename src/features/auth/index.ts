@@ -61,9 +61,9 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 
 export const logOutAsync = (): AppThunk => async (dispatch) => {
 	try {
+		await signOut()
 		const { removeItem } = useLocalStorage<CurrentUser>('user')
 		removeItem()
-		await signOut()
 
 		dispatch(logOut())
 	} catch (error) {
