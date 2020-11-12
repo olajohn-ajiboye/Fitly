@@ -1,36 +1,32 @@
 import React, { useState } from 'react'
 import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledInput } from '@material-ui/core'
-import { useMutation } from '@apollo/client'
-import { useDispatch, useSelector } from 'react-redux'
-import SnackBar from '../../../components/SnackBar/SnackBar'
+import { useSelector } from 'react-redux'
+import { useMutation, useQuery } from '@apollo/client'
 
-// methods
-import { addWeightAsync } from '../dataEntrySlice'
-import { UPSERT_WEIGHT } from '../../../graphql/mutations/index'
-import { upsertWeightVariables, upsertWeight as upsertWeightQuery } from '../../../graphql/mutations/types/upsertWeight'
-import usePrevious from '../../../app/hooks/usePrevious'
-import { useStyles } from './styles'
+// methods and hooks
+import usePrevious from '../../../hooks/usePrevious'
 import { currentUser } from '../../auth'
 
-const date = new Date().toISOString().split('T')[0]
+// queries and mutations
+import { UPSERT_WEIGHT } from '../../../graphql/mutations'
+import { upsertWeight as upsertWeightQuery, upsertWeightVariables } from '../../../graphql/mutations/types/upsertWeight'
+import { getWeights as getWeightsQuery, getWeightsVariables } from '../../../graphql/queries/types/getWeights'
+import { GET_WEIGHTS } from '../../../graphql/queries'
+
+// components and styles
+import SnackBar from '../../../components/SnackBar/SnackBar'
+import { useStyles } from './styles'
+
+const entry_date = new Date().toISOString().split('T')[0]
 
 export default () => {
 	const { root, title } = useStyles()
 	const [weight, setWeight] = useState(90.0)
 	const [message, setMessage] = useState('')
 	const [openSnackBar, setOpen] = useState(false)
+	const [isError, setError] = useState(false)
 	const previousWeight = usePrevious(weight)
 	const user = useSelector(currentUser)
-
-	const dispatch = useDispatch()
-
-	const [addNewWeight] = useMutation<upsertWeightQuery, upsertWeightVariables>(UPSERT_WEIGHT, {
-		variables: {
-			weight,
-			user_id: user?.id,
-			entry_date: date,
-		},
-	})
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const target = e.currentTarget as HTMLInputElement
@@ -38,23 +34,34 @@ export default () => {
 	}
 
 	const onCloseSnackBar = () => setOpen(false)
+
+	const [upsertWeight] = useMutation<upsertWeightQuery, upsertWeightVariables>(UPSERT_WEIGHT, {
+		variables: {
+			id: `${entry_date}-${user?.id}`,
+			entry_date,
+			user_id: user?.id ?? '',
+			weight,
+		},
+	})
+
+	const { refetch } = useQuery<getWeightsQuery, getWeightsVariables>(GET_WEIGHTS, {
+		variables: { user_id: user?.id },
+	})
 	const updateWeight = async (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			// prevent sending request when weight value has not changed
 			if (previousWeight === weight) return
-			await addNewWeight()
-				.then(() => {
-					setMessage('Success updated')
-					setOpen(true)
-				})
-				.catch((error) => {
-					setMessage('Error updating')
-					setOpen(true)
-					console.log(error)
-				})
-
-			dispatch(addWeightAsync(weight))
+			try {
+				await upsertWeight()
+				setMessage('Updated')
+				refetch()
+			} catch (error) {
+				setError(true)
+				setMessage('Error Updating')
+			} finally {
+				setOpen(true)
+			}
 		}
 	}
 
@@ -64,7 +71,7 @@ export default () => {
 				<Typography variant="h6" className={title}>
 					Weight
 				</Typography>
-				<FormControl variant="filled">
+				<FormControl>
 					<FilledInput
 						onKeyPress={(e) => updateWeight(e)}
 						id="filled-adornment-weight"
@@ -79,11 +86,11 @@ export default () => {
 					/>
 					<FormHelperText id="filled-weight-helper-text">Enter Weight</FormHelperText>
 				</FormControl>
-				{/* TODO : toggle message and type of snack bar */}
+
 				<SnackBar
 					message={message}
 					open={openSnackBar}
-					severity="success"
+					severity={isError ? 'error' : 'success'}
 					onClose={onCloseSnackBar}
 					style={{ backgroundColor: 'green' }}
 				/>

@@ -1,4 +1,6 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { createStyles, makeStyles, Theme, styled } from '@material-ui/core/styles'
+import Up from '@material-ui/icons/TrendingUpRounded'
+import Down from '@material-ui/icons/TrendingDownRounded'
 
 export const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -24,3 +26,11 @@ export const useStyles = makeStyles((theme: Theme) =>
 		},
 	})
 )
+
+export const ArrowUp = styled(Up)({
+	color: 'red',
+})
+
+export const ArrowDown = styled(Down)({
+	color: 'green',
+})

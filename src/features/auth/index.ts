@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../../app/store'
 import { RootState } from '../../app/rootReducer'
 import { CurrentUser, signOut } from '../../services/firestore'
-import { useLocalStorage } from '../../app/hooks/useLocalStorage'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 export interface AuthState {
 	isAuth: boolean

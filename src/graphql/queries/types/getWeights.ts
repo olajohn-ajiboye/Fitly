@@ -21,5 +21,5 @@ export interface getWeights {
 }
 
 export interface getWeightsVariables {
-  user_id: any;
+  user_id?: any | null;
 }

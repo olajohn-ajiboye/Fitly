@@ -20,14 +20,21 @@ import { gql } from '@apollo/client'
 // `
 
 export const UPSERT_WEIGHT = gql`
-	mutation upsertWeight($weight: float8!, $user_id: uuid!, $entry_date: date!) {
-		insert_fitly_weight_one(
-			object: { entry_date: $entry_date, user_id: $user_id, value: $weight }
-			on_conflict: { constraint: entry_date, update_columns: entry_date }
+	mutation upsertWeight($id: String, $weight: float8!, $user_id: uuid!, $entry_date: date!) {
+		insert_fitly_weight(
+			objects: { id: $id, entry_date: $entry_date, user_id: $user_id, value: $weight }
+			on_conflict: {
+				constraint: weight_pkey
+				update_columns: value
+				where: { user_id: { _eq: $user_id }, entry_date: { _eq: $entry_date } }
+			}
 		) {
-			value
-			user_id
-			entry_date
+			returning {
+				id
+				user_id
+				entry_date
+				value
+			}
 		}
 	}
 `
@@ -43,6 +50,27 @@ export const UPSERT_CURRENT_USER = gql`
 			email
 			uid
 			photo_url
+		}
+	}
+`
+
+export const UPDATE_WEIGHT = gql`
+	mutation updateWeight($weight: float8, $user_id: uuid) {
+		update_fitly_weight(where: { user_id: { _eq: $user_id } }, _set: { value: $weight }) {
+			returning {
+				value
+			}
+		}
+	}
+`
+
+export const ADD_WEIGHT = gql`
+	mutation addWeight($weight: float8, $user_id: uuid, $entry_date: date) {
+		insert_fitly_weight_one(object: { entry_date: $entry_date, user_id: $user_id, value: $weight }) {
+			entry_date
+			id
+			user_id
+			value
 		}
 	}
 `

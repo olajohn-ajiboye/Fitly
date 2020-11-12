@@ -13,18 +13,19 @@ import { gql } from '@apollo/client'
 // 	}
 // `
 
-export const GET_TODAYS_WEIGHT = gql`
-	query getTodaysWeight($user_id: uuid!, $entry_date: date!) {
-		fitly_weight(where: { user_id: { _eq: $user_id }, entry_date: { _eq: $entry_date } }) {
+export const GET_WEIGHT = gql`
+	query getWeight($user_id: uuid!, $entry_date: date!) {
+		fitly_weight(where: { _and: { user_id: { _eq: $user_id }, _and: { entry_date: { _eq: $entry_date } } } }) {
 			value
-			entry_date
 			user_id
+			id
+			entry_date
 		}
 	}
 `
 
 export const GET_WEIGHTS = gql`
-	query getWeights($user_id: uuid!) {
+	query getWeights($user_id: uuid) {
 		fitly_weight(where: { user_id: { _eq: $user_id } }, order_by: { entry_date: desc }) {
 			value
 			entry_date

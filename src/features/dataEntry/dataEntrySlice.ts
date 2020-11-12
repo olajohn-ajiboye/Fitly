@@ -4,11 +4,8 @@ import { useEffect } from 'react'
 import { RootState } from '../../app/rootReducer'
 import { AppThunk } from '../../app/store'
 import { addFast_insert_fitly_fast_one } from '../../graphql/mutations/types/addFast'
-import { GET_TODAYS_WEIGHT, GET_WEIGHTS } from '../../graphql/queries'
-import {
-	getTodaysWeight as getTodaysWeightQuery,
-	getTodaysWeightVariables,
-} from '../../graphql/queries/types/getTodaysWeight'
+import { GET_WEIGHT, GET_WEIGHTS } from '../../graphql/queries'
+import { getWeight as getWeightQuery, getWeightVariables } from '../../graphql/queries/types/getWeight'
 
 import { getWeights as getWeightsQuery, getWeightsVariables } from '../../graphql/queries/types/getWeights'
 
@@ -50,7 +47,7 @@ export const dayDataSlice = createSlice({
 		updateWeight: (state, action: PayloadAction<number>) => {
 			state.weight = action.payload
 		},
-		getTodaysWeight: (state, action: PayloadAction<number | undefined>) => {
+		getWeight: (state, action: PayloadAction<number | undefined>) => {
 			state.weight = action.payload
 		},
 		getWeights: (state, action: PayloadAction<DayData['allWeights']>) => {
@@ -65,7 +62,7 @@ export const dayDataSlice = createSlice({
 	},
 })
 
-export const { addNewFast, addNewWeight, getTodaysWeight, getWeights, showModal, closeModal } = dayDataSlice.actions
+export const { addNewFast, addNewWeight, getWeight, getWeights, showModal, closeModal } = dayDataSlice.actions
 
 export const addFastAsync = (payload: addFast_insert_fitly_fast_one): AppThunk => async (dispatch) => {
 	try {
@@ -82,7 +79,7 @@ export const addFastAsync = (payload: addFast_insert_fitly_fast_one): AppThunk =
 
 export const addWeightAsync = (weight: number, user_id?: string, entry_date?: string): AppThunk => async (dispatch) => {
 	try {
-		const { data } = useQuery<getTodaysWeightQuery, getTodaysWeightVariables>(GET_TODAYS_WEIGHT, {
+		const { data } = useQuery<getWeightQuery, getWeightVariables>(GET_WEIGHT, {
 			variables: {
 				user_id,
 				entry_date,
@@ -91,19 +88,16 @@ export const addWeightAsync = (weight: number, user_id?: string, entry_date?: st
 		})
 
 		console.log(data)
-
 		dispatch(addNewWeight(weight))
 	} catch (error) {
 		console.log(error)
 	}
 }
 
-export const getTodaysWeightAsync = ({ user_id, entry_date }: getTodaysWeightVariables): AppThunk => async (
-	dispatch
-) => {
+export const getWeightAsync = ({ user_id, entry_date }: getWeightVariables): AppThunk => async (dispatch) => {
 	try {
 		//  get weight for today
-		const { data, refetch } = useQuery<getTodaysWeightQuery, getTodaysWeightVariables>(GET_TODAYS_WEIGHT, {
+		const { data, refetch } = useQuery<getWeightQuery, getWeightVariables>(GET_WEIGHT, {
 			variables: {
 				user_id,
 				entry_date,
@@ -112,7 +106,7 @@ export const getTodaysWeightAsync = ({ user_id, entry_date }: getTodaysWeightVar
 		})
 
 		const weight = data?.fitly_weight[0]?.value
-		dispatch(getTodaysWeight(weight))
+		dispatch(getWeight(weight))
 
 		useEffect(() => {
 			refetch()
