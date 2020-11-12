@@ -3,14 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../../app/store'
 import { RootState } from '../../app/rootReducer'
 import { CurrentUser, signOut } from '../../services/firestore'
-import { useLocalStorage } from '../../app/hooks/useLocalStorage'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
-interface AuthState {
+export interface AuthState {
 	isAuth: boolean
 	currentUser: CurrentUser | null
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
 	isAuth: false,
 	currentUser: null,
 }
@@ -53,7 +53,6 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 	try {
 		const { getItem } = useLocalStorage<CurrentUser>('user')
 		const user = getCurrentUser(getItem())
-
 		dispatch(user)
 	} catch (error) {
 		console.log(error)
@@ -62,9 +61,9 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 
 export const logOutAsync = (): AppThunk => async (dispatch) => {
 	try {
+		await signOut()
 		const { removeItem } = useLocalStorage<CurrentUser>('user')
 		removeItem()
-		await signOut()
 
 		dispatch(logOut())
 	} catch (error) {

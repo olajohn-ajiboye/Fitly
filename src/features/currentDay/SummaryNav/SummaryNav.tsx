@@ -1,40 +1,29 @@
 import React from 'react'
 import { Grid, Paper, Typography } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
-import { getTodaysWeightAsync, getWeightsAsync, allWeight } from '../../dataEntry/dataEntrySlice'
-import useWeightDifferential from '../../../app/hooks/useWeightDifferential'
-import Up from '@material-ui/icons/TrendingUpRounded'
-import Down from '@material-ui/icons/TrendingDownRounded'
+import { useSelector } from 'react-redux'
+import { useQuery } from '@apollo/client'
 
-import { useStyles } from './styles'
+// methods and hooks
 import { currentUser } from '../../auth'
+import useWeightDifferential from '../../../hooks/useWeightDifferential'
 
-const arrowStyle = (color: string) => {
-	return { color }
-}
+// Queries and Mutations
+import { GET_WEIGHTS } from '../../../graphql/queries'
+import { getWeights as getWeightsQuery, getWeightsVariables } from '../../../graphql/queries/types/getWeights'
+
+// components & styles
+import { useStyles, ArrowUp, ArrowDown } from './styles'
 
 const SummaryNav = () => {
 	const { root, paper, typo } = useStyles()
-	const weights = useSelector(allWeight) ?? []
 	const user = useSelector(currentUser)
-	const dispatch = useDispatch()
 
-	const entry_date = new Date().toISOString().split('T')[0]
-	dispatch(
-		getTodaysWeightAsync({
-			user_id: user?.id,
-			entry_date,
-		})
-	)
+	const { data } = useQuery<getWeightsQuery, getWeightsVariables>(GET_WEIGHTS, {
+		variables: { user_id: user?.id },
+	})
 
-	dispatch(
-		getWeightsAsync({
-			user_id: user?.id,
-		})
-	)
-
-	const diff = useWeightDifferential(weights)
-	const isDown = diff?.isDown ? <Up style={arrowStyle('red')} /> : <Down style={arrowStyle('green')} />
+	const diff = useWeightDifferential(data?.fitly_weight)
+	const isDown = diff?.isDown ? <ArrowDown /> : <ArrowUp />
 
 	return (
 		<Grid container spacing={3} className={root}>
@@ -43,7 +32,7 @@ const SummaryNav = () => {
 					{' '}
 					<Typography variant="h2" component="h2" className={typo}>
 						{/* if currentDay doesn't have any weight use last available entered weight */}
-						{weights[0]?.value ?? 90} Kg
+						{data?.fitly_weight[0]?.value ?? 90} Kg
 						<span className="extra">
 							{' '}
 							{isDown}

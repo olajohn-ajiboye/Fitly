@@ -14,8 +14,8 @@ export default function useWeightDifferential(weights: Weight[] | undefined): We
 	const [current, prev] = weights
 	const by = current?.value - prev?.value
 	return {
-		by,
-		isDown: Boolean(by),
+		by: by ?? 0,
+		isDown: by < 0 || isNaN(by),
 		previousWeight: prev?.value,
 		currentWeight: current?.value,
 	}

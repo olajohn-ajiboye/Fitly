@@ -18,6 +18,8 @@ import WorkOut from '../../features/dataEntry/Workout/Workouts'
 // components
 import Icon from '../Styled/Icons'
 import { TabPanel } from './TabPanel'
+
+// styles
 import useStyles from './styles'
 
 function a11yProps(index: any) {

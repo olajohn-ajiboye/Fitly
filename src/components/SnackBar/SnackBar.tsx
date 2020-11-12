@@ -10,7 +10,7 @@ interface SnackBarProps extends AlertProps {
 }
 
 function Alert(props: AlertProps) {
-	return <MuiAlert elevation={6} variant="filled" {...props} />
+	return <MuiAlert elevation={6} {...props} />
 }
 export default function SnackBar({ open, message, onClose, severity }: SnackBarProps) {
 	return (

@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Grid } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
+import { useDispatch } from 'react-redux'
 
-import VerticalDataCarousel from '../components/Carousel/VerticalCarousel'
+import VerticalDataCarousel from '../../../components/Carousel/VerticalCarousel'
+import { closeModal } from '../dataEntrySlice'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -13,22 +14,27 @@ const useStyles = makeStyles((theme: Theme) =>
 			padding: theme.spacing(2),
 		},
 		item: {
-			width: 400,
+			width: 350,
+			[theme.breakpoints.up('sm')]: {
+				width: 550,
+			},
+		},
+		close: {
+			float: 'right',
+			cursor: 'pointer',
 		},
 	})
 )
 
-interface PageProps {
-	onMobileMenuClick: () => void
-	active?: boolean
-}
-
-export default ({ onMobileMenuClick }: PageProps) => {
-	const { root, item } = useStyles()
+export default () => {
+	const { root, item, close } = useStyles()
+	const dispatch = useDispatch()
 
 	return (
 		<div className={root}>
-			<Link to="/">Home</Link>
+			<button className={close} onClick={() => dispatch(closeModal())}>
+				X
+			</button>
 			<Grid container spacing={3} justify="center">
 				<Grid item className={item}>
 					<VerticalDataCarousel />

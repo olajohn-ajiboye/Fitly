@@ -1,51 +1,18 @@
-import { AppBar, Button, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
-import { makeStyles, styled } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import AddTask from '@material-ui/icons/PostAddTwoTone'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+
+// Material UI
+import { AppBar, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+import AddTask from '@material-ui/icons/PostAddTwoTone'
+
+// Methods
 import { logOutAsync } from '../../features/auth/index'
+import { showModal } from '../../features/dataEntry/dataEntrySlice'
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		'& a': {
-			textDecoration: 'none',
-		},
-	},
-	appBar: {
-		display: 'flex',
-		justifyContent: 'center',
-		backgroundColor: 'rgb(29, 38, 54)',
-		backgroundImage: 'linear-gradient(to right, rgba(13, 230, 255, 0.15) 0%, rgba(201, 189, 174, 0) 25%)',
-		color: '#2A338F',
-		height: 50,
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-		color: '#2A338F',
-		backgroundColor: '#EF5FA2',
-		'&:hover': {
-			backgroundColor: 'rgb(198, 211, 231)',
-		},
-	},
-	title: {
-		flexGrow: 1,
-	},
-	logout: {
-		textTransform: 'capitalize',
-		marginLeft: 20,
-	},
-}))
-
-const StyledButton = styled(Button)({
-	backgroundColor: '#EF5FA2',
-	textTransform: 'capitalize',
-	'&:hover': {
-		backgroundColor: 'rgb(198, 211, 231)',
-	},
-})
+//  styles
+import { useStyles, StyledButton } from './styles'
+import { useHistory } from 'react-router-dom'
 
 interface AppBarProps {
 	onMobileMenuClick: () => void
@@ -53,6 +20,12 @@ interface AppBarProps {
 const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 	const { root, appBar, menuButton, title, logout } = useStyles()
 	const dispatch = useDispatch()
+	let history = useHistory()
+
+	const signOut = () => {
+		dispatch(logOutAsync())
+		history.push('/')
+	}
 
 	return (
 		<div className={root}>
@@ -65,13 +38,11 @@ const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 						</Hidden>
 					</IconButton>
 					<Typography variant="h6" className={title}></Typography>
-					<Link to="/data">
-						<StyledButton color="inherit">
-							<AddTask />
-							Add
-						</StyledButton>
-					</Link>
-					<StyledButton color="inherit" className={logout} onClick={() => dispatch(logOutAsync())}>
+					<StyledButton color="inherit" onClick={() => dispatch(showModal())}>
+						<AddTask />
+						Add
+					</StyledButton>
+					<StyledButton color="inherit" className={logout} onClick={signOut}>
 						Sign Out
 					</StyledButton>
 				</Toolbar>

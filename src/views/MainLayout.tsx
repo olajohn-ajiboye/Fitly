@@ -1,11 +1,14 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import { Grid, Hidden } from '@material-ui/core'
+import { Grid, Modal, Fade, Backdrop } from '@material-ui/core'
 
 import { Chart } from '../features/chart'
 import { SummaryNav } from '../features/currentDay'
-import SideBar from '../components/SideBar'
 import { Motivation } from '../features/motivation'
+import { DataEntry } from '../features/dataEntry/Main'
+
+import { closeModal, modalOpen } from '../features/dataEntry/dataEntrySlice'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -22,28 +25,34 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-interface LayoutProps {
-	onMobileMenuClick: () => void
-	active: boolean
-}
-export default function Layout({ onMobileMenuClick, active }: LayoutProps) {
+export default function Layout() {
 	const { container, root } = useStyles()
+	const open = useSelector(modalOpen)
+	const dispatch = useDispatch()
 
 	return (
 		<>
 			<div className={root}>
+				<Modal
+					open={open}
+					onClose={() => dispatch(closeModal())}
+					aria-labelledby="Enter Data"
+					aria-describedby="Data entry"
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 500,
+					}}
+				>
+					<Fade in={open}>
+						<DataEntry />
+					</Fade>
+				</Modal>
+
 				<Grid container className={container} spacing={2}>
-					<Grid item xs lg={2} sm={2}>
-						<Hidden xsDown={!active}>
-							<SideBar onMobileMenuClick={onMobileMenuClick} />
-						</Hidden>
-					</Grid>
-					{/* Main */}
-					<Grid item xs={12} sm={10} lg={10}>
-						<SummaryNav />
-						<Chart />
-						<Motivation />
-					</Grid>
+					<SummaryNav />
+					<Chart />
+					<Motivation />
 				</Grid>
 			</div>
 		</>

@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2),
 		color: theme.palette.text.secondary,
 		display: 'flex',
+		width: 250,
 		flexDirection: 'column',
 		alignItems: 'flex-start',
 		'& img': {
