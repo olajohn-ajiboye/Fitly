@@ -1,23 +1,40 @@
 import { gql } from '@apollo/client'
 
-// export const ADD_FAST = gql`
-// 	mutation addFast {
-// 		insert_fitly_fast_one(
-// 			object: {
-// 				end_time: "2020-10-31T22:44:10.35273"
-// 				feeling: "HAPPY"
-// 				start_time: "2020-10-31T22:44:10.35273"
-// 				user_id: "59016c82-a4db-4877-bf39-da135c35e712"
-// 			}
-// 		) {
-// 			end_time
-// 			feeling
-// 			id
-// 			start_time
-// 			user_id
-// 		}
-// 	}
-// `
+export const UPSERT_FAST = gql`
+	mutation upsertFast(
+		$id: String
+		$start_time: timestamp!
+		$user_id: uuid!
+		$entry_date: date!
+		$end_time: timestamptz
+		$feeling: String
+	) {
+		insert_fitly_fast(
+			objects: {
+				id: $id
+				end_time: $end_time
+				entry_date: $entry_date
+				feeling: $feeling
+				start_time: $start_time
+				user_id: $user_id
+			}
+			on_conflict: {
+				constraint: fast_pkey
+				update_columns: [start_time, feeling, end_time]
+				where: { id: { _eq: $id }, entry_date: { _eq: $entry_date } }
+			}
+		) {
+			returning {
+				id
+				user_id
+				start_time
+				end_time
+				entry_date
+				feeling
+			}
+		}
+	}
+`
 
 export const UPSERT_WEIGHT = gql`
 	mutation upsertWeight($id: String, $weight: float8!, $user_id: uuid!, $entry_date: date!) {

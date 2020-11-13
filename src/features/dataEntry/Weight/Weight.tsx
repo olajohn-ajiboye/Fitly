@@ -17,11 +17,12 @@ import { useStyles } from './styles'
 const entry_date = new Date().toISOString().split('T')[0]
 
 export default () => {
-	const { root, title } = useStyles()
 	const [weight, setWeight] = useState(90.0)
 	const [message, setMessage] = useState('')
 	const [openSnackBar, setOpen] = useState(false)
 	const [isError, setError] = useState(false)
+
+	const { root, title } = useStyles()
 	const previousWeight = usePrevious(weight)
 	const user = useSelector(currentUser)
 

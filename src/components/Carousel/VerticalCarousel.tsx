@@ -49,14 +49,13 @@ export default function VerticalTabs() {
 				variant="scrollable"
 				value={value}
 				onChange={handleChange}
-				aria-label="Vertical tabs example"
+				aria-label="data input carousel"
 				className={classes.tabs}
 			>
 				<Tab label="Weight" icon={<Icon src={balance} alt="diet" />} {...a11yProps(0)} />
-				<Tab label="Diet" icon={<Icon src={diet} alt="diet" />} {...a11yProps(1)} />
-				<Tab label="Fast" icon={<Icon src={fast} alt="fast" />} {...a11yProps(2)} />
+				<Tab label="Fast" icon={<Icon src={fast} alt="fast" />} {...a11yProps(1)} />
+				<Tab label="Diet" icon={<Icon src={diet} alt="diet" />} {...a11yProps(2)} />
 				<Tab label="Workout" icon={<Icon src={workout} alt="workout" />} {...a11yProps(3)} />
-				<Tab label="Diet" icon={<Icon src={balance} alt="diet" />} {...a11yProps(4)} />
 			</Tabs>
 			<SwipeableViews
 				axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -67,13 +66,13 @@ export default function VerticalTabs() {
 					<Weight />
 				</TabPanel>
 				<TabPanel value={value} index={1}>
-					<WorkOut />
+					<Fast />
 				</TabPanel>
 				<TabPanel value={value} index={2}>
-					<Diet />
+					<WorkOut />
 				</TabPanel>
 				<TabPanel value={value} index={3}>
-					<Fast />
+					<Diet />
 				</TabPanel>
 			</SwipeableViews>
 		</Paper>
