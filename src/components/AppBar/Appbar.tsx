@@ -1,16 +1,13 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-// Material UI
 import { AppBar, Hidden, IconButton, Toolbar, Typography } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import AddTask from '@material-ui/icons/PostAddTwoTone'
 
-// Methods
 import { logOutAsync } from '../../features/auth/index'
 import { showModal } from '../../features/dataEntry/dataEntrySlice'
 
-//  styles
 import { useStyles, StyledButton } from './styles'
 import { useHistory } from 'react-router-dom'
 
@@ -20,7 +17,7 @@ interface AppBarProps {
 const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 	const { root, appBar, menuButton, title, logout } = useStyles()
 	const dispatch = useDispatch()
-	let history = useHistory()
+	const history = useHistory()
 
 	const signOut = () => {
 		dispatch(logOutAsync())
@@ -33,7 +30,6 @@ const HeaderBar = ({ onMobileMenuClick }: AppBarProps) => {
 				<Toolbar>
 					<IconButton edge="start" className={menuButton} aria-label="menu">
 						<Hidden>
-							{' '}
 							<MenuIcon onClick={onMobileMenuClick} />
 						</Hidden>
 					</IconButton>

@@ -1,31 +1,32 @@
 import React from 'react'
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
-import { Snackbar } from '@material-ui/core'
+import { AlertProps } from '@material-ui/lab/Alert'
 
+import { StyledSnackBar, StyledAlert } from './styles'
 interface SnackBarProps extends AlertProps {
 	open: boolean
 	message: string
-	onClose: any
+	onClose: () => void
 	severity?: 'error' | 'success'
 }
 
 function Alert(props: AlertProps) {
-	return <MuiAlert elevation={6} {...props} />
+	return <StyledAlert elevation={2} {...props} />
 }
+
 export default function SnackBar({ open, message, onClose, severity }: SnackBarProps) {
 	return (
-		<Snackbar
+		<StyledSnackBar
 			anchorOrigin={{
 				vertical: 'bottom',
 				horizontal: 'center',
 			}}
-			style={{ marginTop: 20 }}
-			autoHideDuration={2000}
+			style={{ marginTop: 50 }}
+			autoHideDuration={120000000}
 			open={open}
 			message={message}
 			onClose={onClose}
 		>
 			<Alert severity={severity}>{message}</Alert>
-		</Snackbar>
+		</StyledSnackBar>
 	)
 }

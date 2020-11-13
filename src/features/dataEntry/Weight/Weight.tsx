@@ -3,18 +3,15 @@ import { Paper, Typography, FormControl, FormHelperText, InputAdornment, FilledI
 import { useSelector } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 
-// methods and hooks
 import usePrevious from '../../../hooks/usePrevious'
 import { currentUser } from '../../auth'
 
-// queries and mutations
 import { UPSERT_WEIGHT } from '../../../graphql/mutations'
 import { upsertWeight as upsertWeightQuery, upsertWeightVariables } from '../../../graphql/mutations/types/upsertWeight'
 import { getWeights as getWeightsQuery, getWeightsVariables } from '../../../graphql/queries/types/getWeights'
 import { GET_WEIGHTS } from '../../../graphql/queries'
 
-// components and styles
-import SnackBar from '../../../components/SnackBar/SnackBar'
+import { SnackBar } from '../../../components/SnackBar'
 import { useStyles } from './styles'
 
 const entry_date = new Date().toISOString().split('T')[0]
@@ -51,7 +48,11 @@ export default () => {
 		if (e.key === 'Enter') {
 			e.preventDefault()
 			// prevent sending request when weight value has not changed
-			if (previousWeight === weight) return
+			if (previousWeight === weight) {
+				setMessage('Nothing Changed')
+				setOpen(true)
+				return
+			}
 			try {
 				await upsertWeight()
 				setMessage('Updated')
