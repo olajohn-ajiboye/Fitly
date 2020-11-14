@@ -9,7 +9,23 @@ export const useStyles = makeStyles((theme: Theme) =>
 			textAlign: 'center',
 			padding: theme.spacing(2),
 			color: theme.palette.text.secondary,
+			'& .fast-timer': {
+				color: 'inherit',
+				fontWeight: 700,
+				fontSize: 15,
+			},
 		},
+		paper: {
+			height: 150,
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+		},
+	})
+)
+
+export const useWeightIndicatorStyle = makeStyles((theme: Theme) =>
+	createStyles({
 		paper: {
 			height: 150,
 			display: 'flex',

@@ -38,7 +38,7 @@ export default function Fast() {
 		},
 	})
 
-	const onClickStart = async () => {
+	const onClickStart = () => {
 		const start = formatTime(new Date().getTime())
 		setLocalStorageItem('fast', {
 			start_time: start,
@@ -48,7 +48,7 @@ export default function Fast() {
 		dispatch({ type: 'startFast', start })
 	}
 
-	const onSelectFeeling = async (feeling: FastFeelingsEnum) => {
+	const onSelectFeeling = (feeling: FastFeelingsEnum) => {
 		setLocalStorageItem('fast', {
 			start_time,
 			end_time,
@@ -57,7 +57,7 @@ export default function Fast() {
 		dispatch({ type: 'addFeeling', feeling })
 	}
 
-	const onClickEnd = async () => {
+	const onClickEnd = () => {
 		const end = formatTime(new Date().getTime())
 		setLocalStorageItem('fast', {
 			start_time: null,
@@ -102,7 +102,7 @@ export default function Fast() {
 				<Paper className={updates}>
 					<h5>
 						{' '}
-						{start_time && 'Started : '} <span>{start_time}</span>
+						{start_time && 'Started : '} <span> &nbsp; {start_time}</span>
 					</h5>
 					<Feeling onSelectFeeling={onSelectFeeling} />
 					<h6>{timer}</h6>
