@@ -123,6 +123,7 @@ export const getWeightsAsync = ({ user_id }: getWeightsVariables): AppThunk => a
 			variables: {
 				user_id,
 			},
+			fetchPolicy: 'cache-first',
 		})
 
 		const weights = data?.fitly_weight

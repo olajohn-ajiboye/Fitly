@@ -20,6 +20,7 @@ const SummaryNav = () => {
 
 	const { data } = useQuery<getWeightsQuery, getWeightsVariables>(GET_WEIGHTS, {
 		variables: { user_id: user?.id },
+		fetchPolicy: 'cache-first',
 	})
 
 	const diff = useWeightDifferential(data?.fitly_weight)

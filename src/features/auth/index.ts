@@ -41,8 +41,8 @@ export const { getCurrentUser, login, logOut } = authSlice.actions
 
 export const loginAsync = (currentUser: CurrentUser): AppThunk => async (dispatch) => {
 	try {
-		const { setItem } = useLocalStorage<CurrentUser>('user', currentUser)
-		setItem()
+		const { setLocalStorageItem } = useLocalStorage<CurrentUser>()
+		setLocalStorageItem('user', currentUser)
 		dispatch(login(currentUser))
 	} catch (error) {
 		console.log(error)
@@ -51,8 +51,8 @@ export const loginAsync = (currentUser: CurrentUser): AppThunk => async (dispatc
 
 export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 	try {
-		const { getItem } = useLocalStorage<CurrentUser>('user')
-		const user = getCurrentUser(getItem())
+		const { getLocalStorageItem } = useLocalStorage<CurrentUser>()
+		const user = getCurrentUser(getLocalStorageItem('user'))
 		dispatch(user)
 	} catch (error) {
 		console.log(error)
@@ -62,8 +62,8 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 export const logOutAsync = (): AppThunk => async (dispatch) => {
 	try {
 		await signOut()
-		const { removeItem } = useLocalStorage<CurrentUser>('user')
-		removeItem()
+		const { removeLocalStorageItem } = useLocalStorage<CurrentUser>()
+		removeLocalStorageItem('user')
 
 		dispatch(logOut())
 	} catch (error) {

@@ -44,6 +44,7 @@ export default () => {
 
 	const { refetch } = useQuery<getWeightsQuery, getWeightsVariables>(GET_WEIGHTS, {
 		variables: { user_id: user?.id },
+		fetchPolicy: 'cache-first',
 	})
 	const updateWeight = async (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === 'Enter') {

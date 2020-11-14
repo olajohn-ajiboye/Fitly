@@ -1,14 +1,14 @@
 import { FirebaseUser } from '../services/firestore'
-export function useLocalStorage<T = FirebaseUser>(key: string, value?: any) {
-	const item = localStorage.getItem(key) as any
+export function useLocalStorage<T = FirebaseUser>() {
+	const item = (key: string) => localStorage.getItem(key) as any
 
-	const getItem = () => JSON.parse(item) as T
-	const setItem = () => localStorage.setItem(key, JSON.stringify(value))
-	const removeItem = () => localStorage.removeItem(key)
+	const getLocalStorageItem = (key: string) => JSON.parse(item(key)) as T
+	const setLocalStorageItem = (key: string, value: any) => localStorage.setItem(key, JSON.stringify(value))
+	const removeLocalStorageItem = (key: string) => localStorage.removeItem(key)
 
 	return {
-		getItem,
-		setItem,
-		removeItem,
+		getLocalStorageItem,
+		setLocalStorageItem,
+		removeLocalStorageItem,
 	}
 }

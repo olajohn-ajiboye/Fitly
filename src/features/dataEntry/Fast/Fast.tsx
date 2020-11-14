@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useReducer } from 'react'
 import { useMutation } from '@apollo/client'
 import { useSelector } from 'react-redux'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
@@ -7,61 +7,65 @@ import format from 'date-fns/format'
 import { Paper, Button } from '@material-ui/core'
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone'
 
+import { currentUser } from '../../auth'
+import { fastReducer, initialFastState } from './reducer'
+import { Feeling, FastFeelingsEnum } from './Feeling'
 import { useStyles } from './styles'
 import { upsertFast, upsertFastVariables } from '../../../graphql/mutations/types/upsertFast'
 import { UPSERT_FAST } from '../../../graphql/mutations'
-import { currentUser } from '../../auth/index'
-import { Feeling, FastFeelingsEnum } from './Feeling'
+import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
 const formatTime = (date: number) => format(date, 'YYYY-MM-DD HH:mm')
+const entry_date = format(new Date().getTime(), 'YYYY-MM-DD')
 
 export default function Fast() {
-	const [startTime, setStart] = useState<string | null>(null)
-	const [endTime, setEnd] = useState<string | null>(null)
-	const [feeling, setFeeling] = useState<FastFeelingsEnum | null>(null)
 	const [timer, setTimer] = useState<string | null>(null)
+	const { id } = useSelector(currentUser)!
+	const { getLocalStorageItem, setLocalStorageItem } = useLocalStorage<upsertFastVariables>()
+	const { start_time, end_time, feeling } = getLocalStorageItem('fast')
+	const [fastState, dispatch] = useReducer(fastReducer, initialFastState)
 
 	const { end, root, start, updates } = useStyles()
-	const { id } = useSelector(currentUser)!
-	const entry_date = new Date().toISOString().split('T')[0]
 
 	const [updateFast] = useMutation<upsertFast, upsertFastVariables>(UPSERT_FAST, {
 		variables: {
 			id: `${entry_date}-${id}`,
-			start_time: startTime,
+			start_time,
 			user_id: id,
 			entry_date,
-			end_time: endTime,
+			end_time,
 			feeling,
 		},
 	})
 
 	const onClickStart = async () => {
 		const start = formatTime(new Date().getTime())
-		await setStart(start)
-		try {
-			updateFast()
-		} catch (error) {
-			console.log(error)
-		}
+		setLocalStorageItem('fast', {
+			start_time: start,
+			end_time,
+			feeling,
+		})
+		dispatch({ type: 'startFast', start })
+	}
+
+	const onSelectFeeling = async (feeling: FastFeelingsEnum) => {
+		setLocalStorageItem('fast', {
+			start_time,
+			end_time,
+			feeling,
+		})
+		dispatch({ type: 'addFeeling', feeling })
 	}
 
 	const onClickEnd = async () => {
 		const end = formatTime(new Date().getTime())
-		await setEnd(end)
+		setLocalStorageItem('fast', {
+			start_time: null,
+			end_time: end,
+			feeling,
+		})
+		dispatch({ type: 'endFast', end })
 		try {
-			updateFast()
-		} catch (error) {
-			console.log(error)
-		} finally {
-			setStart(null)
-		}
-	}
-
-	const onSelectFeeling = async (feeling: FastFeelingsEnum) => {
-		await setFeeling(feeling)
-		try {
-			if (startTime === null) return
 			updateFast()
 		} catch (error) {
 			console.log(error)
@@ -69,14 +73,14 @@ export default function Fast() {
 	}
 
 	useEffect(() => {
-		console.log(startTime)
 		const timer = setInterval(() => {
-			if (startTime) {
-				setTimer(distanceInWordsToNow(startTime))
+			if (start_time) {
+				setTimer(distanceInWordsToNow(start_time))
 			}
 		}, 1000)
 		return () => clearInterval(timer)
-	}, [startTime])
+	}, [start_time, fastState])
+
 	return (
 		<>
 			<Paper className={root}>
@@ -98,7 +102,7 @@ export default function Fast() {
 				<Paper className={updates}>
 					<h5>
 						{' '}
-						{startTime && 'Started : '} <span>{startTime}</span>
+						{start_time && 'Started : '} <span>{start_time}</span>
 					</h5>
 					<Feeling onSelectFeeling={onSelectFeeling} />
 					<h6>{timer}</h6>
