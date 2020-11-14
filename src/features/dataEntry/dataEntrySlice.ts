@@ -79,15 +79,6 @@ export const addFastAsync = (payload: addFast_insert_fitly_fast_one): AppThunk =
 
 export const addWeightAsync = (weight: number, user_id?: string, entry_date?: string): AppThunk => async (dispatch) => {
 	try {
-		const { data } = useQuery<getWeightQuery, getWeightVariables>(GET_WEIGHT, {
-			variables: {
-				user_id,
-				entry_date,
-			},
-			fetchPolicy: 'cache-first',
-		})
-
-		console.log(data)
 		dispatch(addNewWeight(weight))
 	} catch (error) {
 		console.log(error)

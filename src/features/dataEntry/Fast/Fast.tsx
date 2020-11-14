@@ -19,56 +19,50 @@ const formatTime = (date: number) => format(date, 'YYYY-MM-DD HH:mm')
 const entry_date = format(new Date().getTime(), 'YYYY-MM-DD')
 
 export default function Fast() {
+	const { end, root, start, updates } = useStyles()
+
 	const [timer, setTimer] = useState<string | null>(null)
 	const { id } = useSelector(currentUser)!
-	const { getLocalStorageItem, setLocalStorageItem } = useLocalStorage<upsertFastVariables>()
-	const { start_time, end_time, feeling } = getLocalStorageItem('fast')
-	const [fastState, dispatch] = useReducer(fastReducer, initialFastState)
+	const { getLocalStorageItem } = useLocalStorage<any>()
+	const start_time = getLocalStorageItem('fast')?.start_time
+	const { started } = getLocalStorageItem('fast')
 
-	const { end, root, start, updates } = useStyles()
+	const [fastState, dispatch] = useReducer(fastReducer, initialFastState)
 
 	const [updateFast] = useMutation<upsertFast, upsertFastVariables>(UPSERT_FAST, {
 		variables: {
 			id: `${entry_date}-${id}`,
-			start_time,
 			user_id: id,
 			entry_date,
-			end_time,
-			feeling,
+			start_time: fastState.start_time,
+			end_time: fastState.end_time,
+			feeling: fastState.feeling,
 		},
 	})
 
 	const onClickStart = () => {
 		const start = formatTime(new Date().getTime())
-		setLocalStorageItem('fast', {
-			start_time: start,
-			end_time,
-			feeling,
-		})
 		dispatch({ type: 'startFast', start })
 	}
 
-	const onSelectFeeling = (feeling: FastFeelingsEnum) => {
-		setLocalStorageItem('fast', {
-			start_time,
-			end_time,
-			feeling,
-		})
-		dispatch({ type: 'addFeeling', feeling })
-	}
-
-	const onClickEnd = () => {
-		const end = formatTime(new Date().getTime())
-		setLocalStorageItem('fast', {
-			start_time: null,
-			end_time: end,
-			feeling,
-		})
-		dispatch({ type: 'endFast', end })
+	const onSelectFeeling = async (feeling: FastFeelingsEnum) => {
+		await dispatch({ type: 'addFeeling', feeling })
 		try {
-			updateFast()
+			if (started) updateFast()
 		} catch (error) {
 			console.log(error)
+		}
+	}
+
+	const onClickEnd = async () => {
+		const end = formatTime(new Date().getTime())
+		await dispatch({ type: 'endFast', end })
+		try {
+			await updateFast()
+		} catch (error) {
+			console.log(error)
+		} finally {
+			dispatch({ type: 'reset' })
 		}
 	}
 
@@ -77,35 +71,35 @@ export default function Fast() {
 			if (start_time) {
 				setTimer(distanceInWordsToNow(start_time))
 			}
-		}, 1000)
+		}, 6000)
 		return () => clearInterval(timer)
 	}, [start_time, fastState])
 
 	return (
 		<>
-			<Paper className={root}>
+			<Paper className={root} elevation={6}>
 				<div className={start}>
-					<Button variant="contained" color="primary" size="small" onClick={onClickStart}>
+					<Button variant="contained" color="primary" size="small" onClick={onClickStart} disabled={started}>
 						Start
 					</Button>
 					<EditTwoToneIcon> Edit start </EditTwoToneIcon>
 				</div>
 
 				<div className={end}>
-					<Button variant="contained" size="small" color="secondary" onClick={onClickEnd}>
+					<Button variant="contained" size="small" color="secondary" onClick={onClickEnd} disabled={!started}>
 						End
 					</Button>
 					<EditTwoToneIcon />
 				</div>
 			</Paper>
 			<div>
-				<Paper className={updates}>
+				<Paper className={updates} elevation={6}>
 					<h5>
 						{' '}
-						{start_time && 'Started : '} <span> &nbsp; {start_time}</span>
+						{started && 'Started : '} <span> &nbsp; {started && start_time}</span>
 					</h5>
 					<Feeling onSelectFeeling={onSelectFeeling} />
-					<h6>{timer}</h6>
+					<h6>{started && timer}</h6>
 				</Paper>
 			</div>
 		</>

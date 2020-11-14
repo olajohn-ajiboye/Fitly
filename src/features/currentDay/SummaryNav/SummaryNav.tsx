@@ -25,21 +25,21 @@ const SummaryNav = () => {
 	})
 
 	return (
-		<Grid container spacing={3} className={root}>
+		<Grid container spacing={2} className={root}>
 			<WeightIndicator weight={data?.fitly_weight[0]?.value ?? 90} />
 			<Grid item xs={6} sm={3}>
-				<Paper elevation={0} className={paper}>
+				<Paper elevation={6} className={paper}>
 					<FastProgressIndicator />
 				</Paper>
 			</Grid>
 			<Grid item xs={6} sm={3}>
-				<Paper elevation={0} className={paper}>
+				<Paper elevation={6} className={paper}>
 					{' '}
 					{'end_time'}
 				</Paper>
 			</Grid>
 			<Grid item xs={6} sm={3}>
-				<Paper elevation={0} className={paper}>
+				<Paper elevation={6} className={paper}>
 					{' '}
 					Fast
 				</Paper>

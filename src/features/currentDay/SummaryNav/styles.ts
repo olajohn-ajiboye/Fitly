@@ -1,6 +1,7 @@
 import { createStyles, makeStyles, Theme, styled } from '@material-ui/core/styles'
 import Up from '@material-ui/icons/TrendingUpRounded'
 import Down from '@material-ui/icons/TrendingDownRounded'
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar'
 
 export const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -12,11 +13,16 @@ export const useStyles = makeStyles((theme: Theme) =>
 			'& .fast-timer': {
 				color: 'inherit',
 				fontWeight: 700,
-				fontSize: 15,
+				marginTop: '20%',
+			},
+			'& .fast-progress': {
+				textAlign: 'center',
+				width: '95%',
+				height: '90%',
 			},
 		},
 		paper: {
-			height: 150,
+			height: 200,
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -27,7 +33,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 export const useWeightIndicatorStyle = makeStyles((theme: Theme) =>
 	createStyles({
 		paper: {
-			height: 150,
+			height: 200,
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -43,6 +49,9 @@ export const useWeightIndicatorStyle = makeStyles((theme: Theme) =>
 	})
 )
 
+export const StyledProgressIndicator = styled(CircularProgressbarWithChildren)({
+	width: '50px',
+})
 export const ArrowUp = styled(Up)({
 	color: 'red',
 })

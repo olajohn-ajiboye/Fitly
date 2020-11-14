@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme: Theme) =>
 			alignItems: 'center',
 			justifyContent: 'center',
 			marginTop: 10,
-			'& h6': {
+			'& h5,h6': {
 				margin: '10px 0',
 			},
 			'& span': {

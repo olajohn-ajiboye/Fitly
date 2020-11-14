@@ -23,7 +23,7 @@ const WeightIndicator = ({ weight }: WeightIndicatorProps) => {
 	const isDown = diff?.isDown ? <ArrowDown /> : <ArrowUp />
 	return (
 		<Grid item xs={6} sm={3}>
-			<Paper elevation={0} className={paper}>
+			<Paper elevation={6} className={paper}>
 				{' '}
 				<Typography variant="h2" component="h2" className={typo}>
 					{/* if currentDay doesn't have any weight use last available entered weight */}

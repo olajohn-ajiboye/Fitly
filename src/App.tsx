@@ -24,6 +24,9 @@ const theme = createMuiTheme({
 		fontWeightBold: 700,
 	},
 	palette: {
+		action: {
+			disabled: 'white',
+		},
 		text: {
 			primary: 'rgb(198, 211, 231)',
 			secondary: '#00000',

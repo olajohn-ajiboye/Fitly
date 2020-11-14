@@ -18,7 +18,9 @@ export default () => {
 	const { root, paper } = useStyles()
 	return (
 		<Grid item xs={12} sm={4} className={root}>
-			<Paper className={paper}>ChartSide</Paper>
+			<Paper className={paper} elevation={6}>
+				ChartSide
+			</Paper>
 		</Grid>
 	)
 }

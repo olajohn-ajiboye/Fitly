@@ -1,15 +1,22 @@
 import React from 'react'
-import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar'
+import { buildStyles } from 'react-circular-progressbar'
 import CountDownTimer from '../CountDownTimer/index'
 
+import { StyledProgressIndicator } from '../styles'
 import 'react-circular-progressbar/dist/styles.css'
+
+const minValue = 30
+const maxValue = 120
 
 const FastProgressIndicator = () => {
 	return (
 		<>
 			<h1> {''}</h1>
-			<CircularProgressbarWithChildren
-				value={25}
+			<StyledProgressIndicator
+				value={35}
+				className="fast-progress"
+				minValue={minValue}
+				maxValue={maxValue}
 				styles={buildStyles({
 					// Rotation of path and trail, in number of turns (0-1)
 					rotation: 0.25,
@@ -18,7 +25,6 @@ const FastProgressIndicator = () => {
 					strokeLinecap: 'butt',
 
 					// Text size
-					textSize: '14px',
 
 					// How long animation takes to go from one percentage to another, in seconds
 					pathTransitionDuration: 0.5,
@@ -34,7 +40,7 @@ const FastProgressIndicator = () => {
 				})}
 			>
 				<CountDownTimer />
-			</CircularProgressbarWithChildren>
+			</StyledProgressIndicator>
 		</>
 	)
 }
