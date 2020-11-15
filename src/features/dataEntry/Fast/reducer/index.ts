@@ -1,14 +1,14 @@
 import { FastFeelingsEnum } from '.././Feeling'
 
 type Action =
-	| { type: 'startFast'; start: string }
-	| { type: 'endFast'; end: string }
+	| { type: 'startFast'; start: number }
+	| { type: 'endFast'; end: number }
 	| { type: 'addFeeling'; feeling: FastFeelingsEnum }
 	| { type: 'reset' }
 
-interface FastState {
-	start_time: string | null
-	end_time: string | null
+export interface FastState {
+	start_time: number | null
+	end_time: number | null
 	feeling: FastFeelingsEnum | null
 	started: boolean
 }

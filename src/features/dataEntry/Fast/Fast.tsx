@@ -1,31 +1,35 @@
 import React, { useEffect, useState, useReducer } from 'react'
 import { useMutation } from '@apollo/client'
 import { useSelector } from 'react-redux'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+import distanceInWordsToNow from 'date-fns/formatDistanceToNow'
 import format from 'date-fns/format'
 
 import { Paper, Button } from '@material-ui/core'
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone'
 
+import DateTimePicker from '../../../components/DateTimePicker'
+
 import { currentUser } from '../../auth'
-import { fastReducer, initialFastState } from './reducer'
+import { fastReducer, initialFastState, FastState } from './reducer'
 import { Feeling, FastFeelingsEnum } from './Feeling'
 import { useStyles } from './styles'
 import { upsertFast, upsertFastVariables } from '../../../graphql/mutations/types/upsertFast'
 import { UPSERT_FAST } from '../../../graphql/mutations'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
-const formatTime = (date: number) => format(date, 'YYYY-MM-DD HH:mm')
 const entry_date = format(new Date().getTime(), 'YYYY-MM-DD')
 
 export default function Fast() {
-	const { end, root, start, updates } = useStyles()
+	const { edit, end, root, start, updates } = useStyles()
 
 	const [timer, setTimer] = useState<string | null>(null)
+	const [show, setShow] = useState(false)
+	const [selectedDate, handleDateChange] = useState<Date | null>(new Date('2019-01-01T18:54'))
+
 	const { id } = useSelector(currentUser)!
-	const { getLocalStorageItem } = useLocalStorage<any>()
+	const { getLocalStorageItem } = useLocalStorage<FastState>()
 	const start_time = getLocalStorageItem('fast')?.start_time
-	const { started } = getLocalStorageItem('fast')
+	const started = getLocalStorageItem('fast')?.started
 
 	const [fastState, dispatch] = useReducer(fastReducer, initialFastState)
 
@@ -40,8 +44,12 @@ export default function Fast() {
 		},
 	})
 
+	const onCloseDatePicker = () => {
+		setShow(false)
+	}
+
 	const onClickStart = () => {
-		const start = formatTime(new Date().getTime())
+		const start = new Date().getTime()
 		dispatch({ type: 'startFast', start })
 	}
 
@@ -54,8 +62,9 @@ export default function Fast() {
 		}
 	}
 
+	console.log(selectedDate)
 	const onClickEnd = async () => {
-		const end = formatTime(new Date().getTime())
+		const end = new Date().getTime()
 		await dispatch({ type: 'endFast', end })
 		try {
 			await updateFast()
@@ -78,18 +87,25 @@ export default function Fast() {
 	return (
 		<>
 			<Paper className={root} elevation={6}>
+				<DateTimePicker
+					label="Edit Start"
+					show={show}
+					onClose={onCloseDatePicker}
+					selectedDate={selectedDate}
+					handleDateChange={handleDateChange}
+				/>
 				<div className={start}>
 					<Button variant="contained" color="primary" size="small" onClick={onClickStart} disabled={started}>
 						Start
 					</Button>
-					<EditTwoToneIcon> Edit start </EditTwoToneIcon>
+					<EditTwoToneIcon className={edit} onClick={() => setShow(true)} />
 				</div>
 
 				<div className={end}>
 					<Button variant="contained" size="small" color="secondary" onClick={onClickEnd} disabled={!started}>
 						End
 					</Button>
-					<EditTwoToneIcon />
+					<EditTwoToneIcon className={edit} onClick={() => setShow(true)} />
 				</div>
 			</Paper>
 			<div>

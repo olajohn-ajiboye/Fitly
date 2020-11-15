@@ -30,7 +30,7 @@ export const authSlice = createSlice({
 		},
 		getCurrentUser: (state, action: PayloadAction<CurrentUser>) => {
 			state.currentUser = action.payload
-			if (action.payload.display_name) {
+			if (action.payload?.display_name) {
 				state.isAuth = true
 			}
 		},

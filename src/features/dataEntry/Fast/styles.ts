@@ -19,6 +19,9 @@ export const useStyles = makeStyles((theme: Theme) =>
 			marginTop: 20,
 			justifyContent: 'space-around',
 		},
+		edit: {
+			cursor: 'pointer',
+		},
 		updates: {
 			display: 'flex',
 			flexDirection: 'column',
