@@ -91,3 +91,18 @@ export const ADD_WEIGHT = gql`
 		}
 	}
 `
+
+export const UPDATE_FAST = gql`
+	mutation updateFast($id: String!, $end_time: timestamptz, $feeling: String, $start_time: timestamp) {
+		update_fitly_fast_by_pk(
+			pk_columns: { id: $id }
+			_set: { end_time: $end_time, feeling: $feeling, start_time: $start_time }
+		) {
+			id
+			end_time
+			entry_date
+			start_time
+			feeling
+		}
+	}
+`

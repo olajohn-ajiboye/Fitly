@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import { ApolloClient, ApolloProvider, InMemoryCache, HttpLink } from '@apollo/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import LuxonUtils from '@date-io/luxon'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -34,9 +32,7 @@ ReactDOM.render(
 		<BrowserRouter>
 			<ApolloProvider client={client}>
 				<Provider store={store}>
-					<MuiPickersUtilsProvider utils={LuxonUtils}>
-						<App />
-					</MuiPickersUtilsProvider>
+					<App />
 				</Provider>
 			</ApolloProvider>
 		</BrowserRouter>

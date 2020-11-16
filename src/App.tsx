@@ -14,9 +14,9 @@ import { isAuth } from './features/auth'
 import { AppBar } from './components/AppBar'
 import SideBar from './components/Menu'
 
-const LandingPage = lazy(() => import('./views/LandingPage'))
-const MainLayout = lazy(() => import('./views/MainLayout'))
-const LoginPage = lazy(() => import('./views/Login'))
+const LandingPage = lazy(() => import('./layouts/LandingPage'))
+const MainLayout = lazy(() => import('./layouts/Main'))
+const LoginPage = lazy(() => import('./layouts/Login'))
 
 const theme = createMuiTheme({
 	typography: {

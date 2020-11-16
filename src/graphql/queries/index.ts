@@ -1,17 +1,17 @@
 import { gql } from '@apollo/client'
 
-// export const GET_FAST = gql`
-// 	query getUser {
-// 		fitly_fast {
-// 			id
-// 			user_id
-// 			feeling
-// 		}
-// 		fitly_user(where: { id: { _eq: "6c1e05a7-8339-4a29-9a86-715a4e5ea14c" } }) {
-// 			display_name
-// 		}
-// 	}
-// `
+export const GET_FAST = gql`
+	query getFasting($id: String!) {
+		fitly_fast_by_pk(id: $id) {
+			end_time
+			entry_date
+			feeling
+			id
+			start_time
+			user_id
+		}
+	}
+`
 
 export const GET_WEIGHT = gql`
 	query getWeight($user_id: uuid!, $entry_date: date!) {

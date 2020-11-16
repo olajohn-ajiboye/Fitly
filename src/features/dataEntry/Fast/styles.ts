@@ -29,18 +29,16 @@ export const useStyles = makeStyles((theme: Theme) =>
 			justifyContent: 'center',
 			marginTop: 10,
 			'& h5,h6': {
-				margin: '10px 0',
+				margin: 10,
+				fontWeight: 500,
 			},
 			'& span': {
 				color: '#EF5FA2',
 			},
-			'& > *': {
-				margin: 0,
-				padding: 0,
-			},
 			'& .feeling': {
 				fontSize: '2rem',
-				margin: 10,
+				padding: 10,
+				textAlign: 'center',
 				cursor: 'pointer',
 			},
 		},
