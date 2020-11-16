@@ -4,16 +4,39 @@ import CountDownTimer from '../CountDownTimer/index'
 
 import { StyledProgressIndicator } from '../styles'
 import 'react-circular-progressbar/dist/styles.css'
+import { useQuery } from '@apollo/client'
+import { getFasting, getFastingVariables } from '../../../../graphql/queries/types/getFasting'
+import { GET_FAST } from '../../../../graphql/queries'
+import { useSelector } from 'react-redux'
+import { currentUser } from '../../../auth'
+import format from 'date-fns/format'
 
-const minValue = 30
-const maxValue = 120
+interface ProgressProps {
+	value?: number
+	date?: number
+}
 
+const minValue = 1
+const maxValue = 18
+
+const entry_date = format(new Date().getTime(), 'yyyy-MM-dd')
 const FastProgressIndicator = () => {
+	const user = useSelector(currentUser)
+	const id = `${entry_date}-${user?.id}`
+
+	const { data: fastData } = useQuery<getFasting, getFastingVariables>(GET_FAST, {
+		variables: { id },
+		fetchPolicy: 'cache-first',
+	})
+
+	const countdownTime =
+		fastData?.fitly_fast_by_pk?.start_time && new Date(fastData?.fitly_fast_by_pk?.start_time).getTime() + 64800000
+
 	return (
 		<>
 			<h1> {''}</h1>
 			<StyledProgressIndicator
-				value={35}
+				value={10}
 				className="fast-progress"
 				minValue={minValue}
 				maxValue={maxValue}
@@ -39,7 +62,7 @@ const FastProgressIndicator = () => {
 					backgroundColor: '#3e98c7',
 				})}
 			>
-				<CountDownTimer />
+				<CountDownTimer date={countdownTime} />
 			</StyledProgressIndicator>
 		</>
 	)

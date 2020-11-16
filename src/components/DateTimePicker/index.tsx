@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AlarmIcon from '@material-ui/icons/AddAlarm'
 import { IconButton, InputAdornment } from '@material-ui/core'
 import { DateTimePicker } from '@material-ui/pickers'
-import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import LuxonUtils from '@date-io/luxon'
 
@@ -30,9 +29,10 @@ function CustomDateTimePicker({ show, onClose, selectedDate, handleDateChange, o
 				defaultValue={selectedDate}
 				value={selectedDate}
 				TextFieldComponent={comp}
-				onChange={(a) => handleDateChange(a)}
+				onChange={handleDateChange}
 				onAccept={onAccept}
 				animateYearScrolling={true}
+				format="yyyy-MM-dd'T'HH:mm:ss"
 				InputProps={{
 					endAdornment: (
 						<InputAdornment position="end">

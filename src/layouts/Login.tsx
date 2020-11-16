@@ -61,7 +61,7 @@ export default function LoginPage() {
 			dispatch(loginAsync(currentUser))
 			history.replace(from)
 		} catch (error) {
-			console.log(error)
+			console.warn(error)
 		}
 	}
 

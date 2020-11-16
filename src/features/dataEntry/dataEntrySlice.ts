@@ -73,7 +73,7 @@ export const addFastAsync = (payload: addFast_insert_fitly_fast_one): AppThunk =
 		}
 		dispatch(addNewFast(feelingUpdate))
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 
@@ -81,7 +81,7 @@ export const addWeightAsync = (weight: number, user_id?: string, entry_date?: st
 	try {
 		dispatch(addNewWeight(weight))
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 
@@ -103,7 +103,7 @@ export const getWeightAsync = ({ user_id, entry_date }: getWeightVariables): App
 			refetch()
 		}, [dispatch, refetch])
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 
@@ -124,7 +124,7 @@ export const getWeightsAsync = ({ user_id }: getWeightsVariables): AppThunk => a
 			refetch()
 		}, [dispatch, refetch])
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 

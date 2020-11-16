@@ -45,7 +45,7 @@ export const loginAsync = (currentUser: CurrentUser): AppThunk => async (dispatc
 		setLocalStorageItem('user', currentUser)
 		dispatch(login(currentUser))
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 
@@ -55,7 +55,7 @@ export const getCurrentUserAsync = (): AppThunk => async (dispatch) => {
 		const user = getCurrentUser(getLocalStorageItem('user'))
 		dispatch(user)
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 
@@ -67,7 +67,7 @@ export const logOutAsync = (): AppThunk => async (dispatch) => {
 
 		dispatch(logOut())
 	} catch (error) {
-		console.log(error)
+		console.warn(error)
 	}
 }
 
