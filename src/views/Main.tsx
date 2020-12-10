@@ -9,6 +9,7 @@ import { Motivation } from '../features/motivation'
 import { DataEntry } from '../features/dataEntry/Main'
 
 import { closeModal, modalOpen } from '../features/dataEntry/dataEntrySlice'
+import { ErrorBoundary } from '../components/ErrorBoundary'
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -31,7 +32,7 @@ export default function Layout() {
 	const dispatch = useDispatch()
 
 	return (
-		<>
+		<ErrorBoundary>
 			<div className={root}>
 				<Modal
 					open={open}
@@ -55,6 +56,6 @@ export default function Layout() {
 					<Motivation />
 				</Grid>
 			</div>
-		</>
+		</ErrorBoundary>
 	)
 }

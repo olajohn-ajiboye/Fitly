@@ -22,6 +22,7 @@ const createApolloClient = () => {
 		link: new HttpLink({
 			uri: REACT_APP_GRAPHQL_END_POINT,
 		}),
+
 		cache: new InMemoryCache(),
 	})
 }

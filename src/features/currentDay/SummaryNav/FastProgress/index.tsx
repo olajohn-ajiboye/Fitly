@@ -16,9 +16,6 @@ interface ProgressProps {
 	date?: number
 }
 
-const minValue = 1
-const maxValue = 18
-
 const entry_date = format(new Date().getTime(), 'yyyy-MM-dd')
 const FastProgressIndicator = () => {
 	const user = useSelector(currentUser)
@@ -32,14 +29,14 @@ const FastProgressIndicator = () => {
 	const countdownTime =
 		fastData?.fitly_fast_by_pk?.start_time && new Date(fastData?.fitly_fast_by_pk?.start_time).getTime() + 64800000
 
+	//const value = differenceInMilliseconds(countdownTime, Date.now())
+
 	return (
 		<>
 			<h1> {''}</h1>
 			<StyledProgressIndicator
 				value={10}
 				className="fast-progress"
-				minValue={minValue}
-				maxValue={maxValue}
 				styles={buildStyles({
 					// Rotation of path and trail, in number of turns (0-1)
 					rotation: 0.25,

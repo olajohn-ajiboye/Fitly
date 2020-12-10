@@ -14,6 +14,8 @@ import { GET_WEIGHTS } from '../../../graphql/queries'
 import { SnackBar } from '../../../components/SnackBar'
 import { useStyles } from './styles'
 
+import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary'
+
 const entry_date = new Date().toISOString().split('T')[0]
 
 export default () => {
@@ -35,7 +37,7 @@ export default () => {
 
 	const [upsertWeight] = useMutation<upsertWeightQuery, upsertWeightVariables>(UPSERT_WEIGHT, {
 		variables: {
-			id: `${entry_date}-${user?.id}`,
+			id: null,
 			entry_date,
 			user_id: user?.id ?? '',
 			weight,
@@ -60,8 +62,7 @@ export default () => {
 				setMessage('Updated')
 				refetch()
 			} catch (error) {
-				setError(true)
-				setMessage('Error Updating')
+				console.log(error)
 			} finally {
 				setOpen(true)
 			}
@@ -69,7 +70,7 @@ export default () => {
 	}
 
 	return (
-		<>
+		<ErrorBoundary>
 			<Paper className={root}>
 				<Typography variant="h6" className={title}>
 					Weight
@@ -98,6 +99,6 @@ export default () => {
 					style={{ backgroundColor: 'green' }}
 				/>
 			</Paper>
-		</>
+		</ErrorBoundary>
 	)
 }
